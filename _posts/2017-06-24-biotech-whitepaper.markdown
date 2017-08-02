@@ -1,6 +1,5 @@
 ---
 layout: post
-title:  "Intercepting Transmissions : Improving Public Health Investigations with Genomic Data"
 date:   2017-06-22 
 categories: psm biotech
 ---
@@ -71,7 +70,37 @@ Security (CIS) could issue its own Linux distribution instead of offering only
 
 ### Data Management
 
+Data management is another pain point in managing public health data. Despite
+much effort and expense being made to ensure that lab equipment and supplies are
+stocked, personnel trained, and protocols met, the effort seems to end once the
+data from the instruments have been retrieved. The use of unwieldy spreadsheets
+that aren't version controlled, lack any sort of template, and are frequently
+riddled with typos and mislabeled is a pandemic. Attempting to ask a programmer
+or IT to help fix these sort of issues once they've already occured will amount
+to frustration between both administration and the technical team.
+
+Data loss is still a prevalent issue. Ensuring that each workstation has an
+external backup disk and that servers are backed up nightly should be considered
+company policy.
+
 ### Lack of Standardized Pipelines
+
+Lost development time due to each programming team coming up with their own
+solutions, and re-inventing solutions that have already been addressed countless
+times in other organizations has become incredibly costly. Because so many do
+not standardize solutions to common problems, it is almost inevitable that the
+code that one programming team has worked on in the past will be deemed
+unmaintainable, and the new programmer will simply write his or her own
+implementation that turns out to not be much better than the previous or perhaps
+even worse.
+
+It is not lazy to re-use code, it is practical. Using packages like
+[Luigi](https://github.com/spotify/luigi) or
+[Snakemake](https://snakemake.readthedocs.io/en/stable/) for pipelines with
+multiple tasks allow current and future developers of a project maintain the
+software package and expedite new features. Less time will be taken considering
+software architectural issues, and more time will be dedicated to the actual
+analyses that need to be orchestrated. 
 
 ### Data Science
 
@@ -89,6 +118,15 @@ network requires a respective node be investigated, would be an improvement
 over the shoot-from-the-hip investigations being conducted today.
 
 Decisions on what sort of intervention should actually take place is done in an
-opaque manner. 
+opaque manner. It would be better to draft SOPs before a project is even funded.
 
 
+### Summary
+
+In summary, most of the issues we face are not all that technical at this point,
+but have more to do with the management of digital assets. Internet services
+have not been much of a solution given the sensitivity of the data involved, and
+due to the custom nature of analyzing data based on specific assays. Adhering to
+standards set and giving appropriate attention to data management and software
+development does seem like a good place to start. Especially given that it
+serves as the fundamental background of the services provided.
