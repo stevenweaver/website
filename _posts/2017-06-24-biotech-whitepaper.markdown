@@ -106,9 +106,9 @@ analyses that need to be orchestrated.
 
 Broadly speaking, the aim of public health sectors is the following
 
-1) Accumulate data on the relationships between genetic traits and diseases across populations
-2) Use this information to develop strategies to promote health and prevent disease in populations
-3) Target and evaluate population-based interventions
+1. Accumulate data on the relationships between genetic traits and diseases across populations
+2. Use this information to develop strategies to promote health and prevent disease in populations
+3. Target and evaluate population-based interventions
 
 However, how these interventions are actually implemented, and which metrics are
 used to come to such conclusions, are not formalized in any way. A loose level of
