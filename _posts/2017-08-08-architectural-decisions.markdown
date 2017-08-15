@@ -17,7 +17,7 @@ part to the release of the V8 open source JavaScript engine in 2008, we have
 been able to take advantage of the advancement in web technologies to bring a
 much improved experience with the latest release of Datamonkey. In addition to
 an entirely new architecture written in Node.js, Datamonkey has also implemented
-new, interactive visualizations in React and d3.js.
+new, interactive visualizations with React and d3.js.
 
 ## Datamonkey Architecture
 
@@ -26,46 +26,55 @@ analyses of sequence alignments using statistical models developed in HyPhy via
 the web. These analyses can take anywhere from minutes to hours to complete
 depending on the type of analysis being conducted and the size of the dataset.
 
-The web application is separated into two components(see figure). The first
-component hosts html templates, accepts new analysis requests, provides the  job
-status in real-time, serves results pages, and optionally emails users when
-their job has completed.
+In order to accommodate hundreds of long running jobs daily, the web application
+is separated into two separate components (see figure). One component is hosted
+on a standard webserver, and performs standard model-view-controller duties.
+Responsibilities include hosting html templates, accepting new analysis
+requests, providing job status in real-time, serving results, and optionally
+emailing users when their job has completed.
 
-The second component is hosted on a high performance computing cluster that
-manages and reports updates on processes to the first component via WebSockets.
-The reason for two components is to allow the second component to be distributed
-across multiple or alternative high performance computing resources with minimal
-code rewriting and disturbance to the component of the application that faces
-the world.
+The second component is hosted on a high performance computing cluster, and
+performs both job provisioning and status reporting to the web application
+component via WebSockets. By separating this part of the application into its
+own component, we have the option to distribute computationally intensive jobs
+across multiple or alternative high performance computing resouces with minimal
+configuration chages and disturbance to the component of the application that is
+user facing.
 
+### Specific Technologies
 
-### Node.js, Redis, and MongoDB
+#### Node.js, WebSockets, and Redis
 
 The researcher receives updates on their analyses in real-time. In the past and
 due to the client-server architecture of the web, real-time could only be
 simulated by polling the server at regular intervals. The experience of early
 polling applications was inefficient because it required multiple requests to
-the server, and therefore inherently inferior to the experience of
-running the job on the machine itself. Datamonkey.js makes use of the
-event-driven nature of Node.js and JavaScript, along with the WebSocket
-protocol, in order for the researcher to receive updates on their analysis as
-soon as they happen.  We acheived this by utilizing a publish-subscribe
-pattern.  When the job process (most commonly HyPhy) writes to standard output,
-the text is published to a transient key/value datastore (Redis). A publish
-event is triggered, and listening subscribers receive the update immediately.
-For browsers using WebSockets, this means that the text is received immediately
-from the server without polling, and can be displayed or visualized in any
-defined way by client-side code.
+the server, and was therefore inherently inferior to the experience of running
+the job on the machine itself. Datamonkey makes use of the event-driven nature
+of Node.js and JavaScript, along with the WebSocket protocol, in order for the
+researcher to receive updates on their analysis as soon as they happen.  We
+acheived this by utilizing a publish-subscribe pattern.  When the job process
+(most commonly HyPhy) writes to standard output, the text is published to a
+transient key/value datastore (Redis). A publish event is triggered, and
+listening subscribers receive the update immediately.  For browsers using
+WebSockets (the most commonly used browsers all have an implementation of the
+protocol), the text is received immediately from the server without polling, and
+can be displayed or visualized in any defined way by client-side code.
 
-
-### React and d3.js
+#### d3.js, React, and Webpack
 
 Results visualization is rendered entirely by way of client-side JavaScript.
-With the advent of svg and canvas HTML elements being widely supported in all
-major browsers, and subsequent frameworks such as d3 utilizing those elements
-being made available, we have been able to develop visualizations that
-researchers can immediately interact with in order to facilitate inferences
+With the advent of svg and canvas HTML elements being widely supported in the
+most commonly used browsers, and subsequent frameworks such as d3 utilizing
+those elements being made available, we have been able to develop visualizations
+that researchers can immediately interact with in order to facilitate inferences
 that can be made from their results.
+
+d3.js 
+
+React, a JavaScript library for building user interfaces, allows
+
+Webpack
 
 
 ### TORQUE Job Scheduler
