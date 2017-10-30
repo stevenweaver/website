@@ -29,7 +29,6 @@ respectively.
 
 ### Statistics
 
-
 According to the NIH, in 2016 more than 11.5 million Americans ages 12 and
 older reported misuse of prescription opioids in the past year, and nearly
 950,000 reported heroin use in the past year.<sup>10</sup>
@@ -55,7 +54,7 @@ prescribing and increasing opioid-related morbidity and mortality.
 
 ![Opioid Deaths]({{ site.url }}/assets/cdc_opioid_deaths_multicolor.gif)
 
-### John Kapoor and Insys Pharmeuciticals
+### John Kapoor and Insys Pharmeuciticals - Background
 
 
 With the obvious dangers associated with the misuse of prescription opioids, the
@@ -81,9 +80,6 @@ Kapoor, among others
 > and kickbacks, the practitioners wrote large numbers of prescriptions for the
 > patients, most of whom were not diagnosed with cancer.
 
-Clearly, if guilty, this is extreme malpractice considering that the opioid
-crisis is now considered a National Health Emergency.
-
 In addition to John Kapoor, a doctor is also facing losing his license and a
 lawsuit by the New Jersey Attorney General Porrino.<sup>8</sup>
 
@@ -98,7 +94,66 @@ Porrino's office also cited emails the doctor received from Insys staff. In one
 email, an Insys rep told Sun to "keep them rolling," referring to a patient
 who'd just won insurance coverage for the pain drug.
 
-### Ethical Concerns and Conclusions
+### Ethical Considerations
+
+When deciding on how to address the issue of prescription opioids, we must work
+within an ethical decision-making framework. This allows the individual to think
+about *why* an action is right or wrong instead of working primarily on
+instinct, a situation where often our judgment is clouded by what would benefit
+ourselves most as opposed making a functional society that benefits everyone
+long-term.
+
+#### Utilitarian
+
+When considering the utilitarian approach, we ask the question "Of any two
+actions, which one will produce the greatest balance of benefits over harms?".
+Most people who take prescription pain killers do not abuse them and certainly
+do not progress to heroin. The drug works as intended, and they are relieved
+from living a much more painful life. Roughly one out of four people prescribed
+opioids misuse them, and only 6% transition to heroin.<sup>15</sup>
+
+If we continue to allow prescription opioid medication to be prescribed at the
+current rate, the majority of people would benefit from them. However, the
+people who develop a disorder are negatively impacted in a very meaninful way. I
+would argue that a weight needs to be applied to be able to accurately assess
+whether the net good outweight the bad. For example, if taking the drug improves
+an individual's life by 20% for those that do not develop issues, and degrades a
+person's life by 90% for those that are negatively impacted, then the
+utilitarian answer is that the drugs should only be prescribed as much as those
+weights to equal out. Under those rates, the percentage of people negatively
+impacted would have to be reduced to 18%.
+
+#### Justice
+
+When considering the justice approach, we must consider the question "does this
+action treat everyone the same way, or does it show favoritism and
+discrimination?". When considering Insys's actions, it is quite clear that they
+were in violation of the law if the allegations are true. To not indict them
+with the evidence provided would not be fair or just. More difficult action to
+make is to whether to strengthen regulations on prescription opioid use. Is it
+fair to discriminate against those with pain because a minority of them are
+likely to abuse the medication? Isn't that sort of policy the same as
+stereotyping? Which we vehemently denounce?
+
+#### Common Good (Hippocratic Oath)
+
+When considering the common good approach, the question is "what action advances
+the commond good?", or to identify a society we wish to live in and strive for.
+Surely, we do not want to live in a society with 25%+ of people hampered by drug
+abuse. It causes the people around them grief, reduces positive productivity in
+society, and increases expenses to help take care of the ones that are affected.
+In addition, the people affected have a severely diminished quality of life,
+which is by definition antithetical to striving for the common good.
+
+#### Virtue
+
+When considerin the virtue approach, we must answer the question "what action
+develops moral virtues in ourselves and our communities?". Drug addiction
+violates our unified value of self-control. To enable such addiction is neither
+compassionate nor generous. When Insys bribed doctors with money to prescribe
+medication when they should have not, they violated these commonly held virtues.
+
+### Conclusions
 
 To rapidly reduce the use of prescription opioid pain killers immediately would
 be rash. While it is reported that the incidence of heroin use among people who
@@ -111,19 +166,23 @@ in rates of heroin use and death due to dependency.<sup>11</sup>
 A combination of behavorial healthcare, as proposed by Senator Elizabeth
 Warren<sup>12</sup>, to help the needs of those already addicted in addition to
 preventative measures like greater regulation of what and when can be prescribed
-are both necessary to ensure that heroin abuse does continue its upward trend. 
+are both necessary to ensure that heroin abuse does continue its upward trend.
+This would be the just, advance the common good, be utilitarian, and virtuous
+actions to take.
 
 Conducting business to maximize profit often creates ethical issues. Addicted
 customers is a good thing in a business context, but it is shameful when
 considering that these are people's children, parents, spouses, and other loved
-ones whose lives are being destroyed due to this practices.
+ones whose lives are being destroyed due to this practices. It is not
+utilitarian for society as a whole and is in direct conflict with the common
+good.
 
 Our government should become more prevantative than reactionary. Addictive
 prescription drugs should be regulated and monitored from the outset. With the
 rise of big data and rapid communication, a greater effort to put in place solid
 data science that recognizes and reports odd behavior in monetary spending and
-prescription practices should be put in to play immediately.
-
+prescription practices should be put in to play immediately. Surely, this action
+passes all the checkboxes in any ethical framework.
 
 
 ### References
@@ -142,3 +201,4 @@ prescription practices should be put in to play immediately.
 12. https://www.bostonglobe.com/opinion/2017/09/11/can-fight-opioid-crisis-without-adequate-health-care/EX5ZfS3cWBEdohSRsvIqEJ/story.html
 13. https://www.healthlawyers.org/hlresources/Health%20Law%20Wiki/Anti-Kickback%20Statute.aspx
 14. https://www.justice.gov/usao-ma/pr/founder-and-owner-pharmaceutical-company-insys-arrested-and-charged-racketeering
+15. https://www.drugabuse.gov/drugs-abuse/opioids/opioid-crisis
