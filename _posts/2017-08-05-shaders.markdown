@@ -1,0 +1,84 @@
+## An Introduction to Shaders and its influence on GPU Architecture
+
+I admittedly want more humanities in computer science. Computers play an
+integral part in our lives, from setting up a first date through Facebook
+messenger to new experiences via unique gameplay patterns.
+
+* How does this relate to shaders? Each little square of our grid paper is a thread (a pixel)
+* Pixels are treated as threads
+* Translate
+* Classic scaling and other transforms
+
+"The grid provides a framework within which human intuition and invention can
+operate and that it can subvert. Within the chaos of nature patterns provide a
+constrast and promise of order. From early patterns on pottery to geometric
+mosaics in Roman baths, people have long used grids to enhance their lives with
+decoration." - http://nickm.com/trope_tank/10_PRINT_121114.pdf
+
+Reference more Ian Bogost
+"Talk to the tree, make friends with it." Bob Ross
+
+Perlin noise algorithm
+
+
+## History
+Atari
+NEC µPD7220 - they actually needed two in the PC-98 series for text and
+graphics.
+Tohou project games.
+I have a good friend that works in sales at NEC.
+
+TIGA Instruction Set
+https://en.wikipedia.org/wiki/Texas_Instruments_Graphics_Architecture
+http://www.ti.com/lit/ug/spvu015c/spvu015c.pdf
+TMS34010
+TMS34082
+
+
+## Case Study : Namco System 21 and 22
+
+Texas Instruments is a funny company, for example, the chip that performed
+vertex calculation in the Namco System 21 is still for sale.
+http://www.ti.com/product/TMS320C25/description
+
+Example Namco System 21 game
+https://www.youtube.com/watch?v=_zZ3Fnm7zUI
+
+Example Namco System 22 game
+
+- When was vertices per second replaced with floating point operations per second?
+
+https://en.wikipedia.org/wiki/Evans_%26_Sutherland
+
+
+VGA
+
+When did the term GPU come into existence? They were co-processors and chips in
+the 80s and 90s.
+
+A question for '90s kids : Why did Super FX chip need to exist? What was it
+behind the marketing gimmick? Sergei was probably laughing at the SNES at this
+point. 
+
+In the early- and mid-1990s, real-time 3D graphics was becoming common.
+
+
+### Predecessor to consumer GPU
+Hardware T&L had been used by arcade game system boards since 1993,[1] and by
+home video game consoles since the Nintendo 64's Reality Coprocessor GPU in 1996
+
+https://en.wikipedia.org/wiki/Reality_Coprocessor
+https://en.wikipedia.org/wiki/Silicon_Graphics
+
+
+The first version of OpenGL, version 1.0, was released in January 1992 by Mark
+Segal and Kurt Akeley.
+
+nVidia came up with the term GPU https://en.wikipedia.org/wiki/GeForce_256
+
+Most game engines outside of Windows utilize OpenGL
+There was a big push by Valve 2 or 3 years ago
+
+https://en.wikipedia.org/wiki/OpenGL#OpenGL_3.2
+
+
