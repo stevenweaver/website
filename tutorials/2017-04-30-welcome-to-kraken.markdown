@@ -1,9 +1,9 @@
----
-layout: post
-title:  "Kraken on Galaxy"
-date:   2017-04-30 09:44:04 -0400
-categories: kraken spond
----
+<!------->
+<!--layout: post-->
+<!--title:  "Kraken on Galaxy"-->
+<!--date:   2017-04-30 09:44:04 -0400-->
+<!--categories: kraken spond-->
+<!------->
 
 ## Brief Introduction 
 
