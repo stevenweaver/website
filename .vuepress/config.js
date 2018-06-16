@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Probably Neutral with Steven Weaver",
+  title: "Likely Neutral with Steven Weaver",
   themeConfig: {
-    sidebar: [['/', 'Guide'], ['/demos/intro', 'DEMO: Introduction']],
+    sidebar: [['/', 'Guide'], ['/av', 'Audio and Video']],
   },
 }
