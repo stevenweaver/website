@@ -1,6 +1,11 @@
 module.exports = {
   title: "Steven Weaver",
   themeConfig: {
+    nav: [
+      { text: 'Home', link: '/' },
+      { text: 'Github', link: 'https://github.com/stevenweaver' },
+      { text: 'Twitter', link: 'https://twitter.com/maximumsteve' },
+    ],
     sidebar: {
       '/av/': [
        ['', 'Books, Audio, and Visual'],
@@ -8,6 +13,7 @@ module.exports = {
        'bubblegum-crisis-goofs'
       ],
       '/': [
+        ['publications', "Publications"],
         ['misc/quotations', "Quotes"],
         ['tutorials/kraken', "Tutorials - Kraken"],
         ['av/', "Books, Audio, and Visual"]

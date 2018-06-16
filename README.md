@@ -1,6 +1,10 @@
-![Ocean Beach, San Diego, 2010](./s2.jpg)
 
-# Steven Weaver
+
+<p id="sw-image">
+  <img src="./s2.jpg" />
+</p>
+
+## Steven Weaver
 
 I'm a Senior Programming Analyst in the Institute for Genomics and Evolutionary
 Medicine at Temple University.
