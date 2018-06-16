@@ -1,4 +1,4 @@
-## Bubblegum Crisis Goofs
+# Bubblegum Crisis Goofs
 
 ![spoon](./password.png)
 ![spoon](./galbeston.png)

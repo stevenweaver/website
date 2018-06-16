@@ -1,6 +1,17 @@
 module.exports = {
-  title: "Likely Neutral with Steven Weaver",
+  title: "Steven Weaver",
   themeConfig: {
-    sidebar: [['/', 'Guide'], ['/av', 'Audio and Video']],
-  },
+    sidebar: {
+      '/av/': [
+       ['', 'Books, Audio, and Visual'],
+       'does-the-internet-dream',
+       'bubblegum-crisis-goofs'
+      ],
+      '/': [
+        ['misc/quotations', "Quotes"],
+        ['tutorials/kraken', "Tutorials - Kraken"],
+        ['av/', "Books, Audio, and Visual"]
+      ]
+   },
+  }
 }

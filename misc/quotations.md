@@ -1,4 +1,4 @@
-## Selected Quotations 
+# Selected Quotations 
 
 ### Scott Kelly
 > We had a saying in the Navy: ‘Better is the enemy of good enough,’
