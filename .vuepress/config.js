@@ -10,7 +10,8 @@ module.exports = {
       '/av/': [
        ['', 'Books, Audio, and Visual'],
        'does-the-internet-dream',
-       'bubblegum-crisis-goofs'
+       'bubblegum-crisis-goofs',
+       'home-videos'
       ],
       '/': [
         ['publications', "Publications"],
