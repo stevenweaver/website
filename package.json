@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@observablehq/notebook-runtime": "^1.3.1",
+    "displaying-phylogenetic-trees-with-phylotree-js": "https://api.observablehq.com/@stevenweaver/displaying-phylogenetic-trees-with-phylotree-js.tgz?key=40d6baff3ae54e05",
+    "jquery": "^3.3.1",
+    "phylotree": "^0.1.6"
+  }
+}

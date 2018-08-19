@@ -17,6 +17,7 @@ module.exports = {
         ['publications', "Publications"],
         ['misc/quotations', "Quotes"],
         ['tutorials/kraken', "Tutorials - Kraken"],
+        ['tutorials/phylotree', "Tutorials - Phylotree"],
         ['av/', "Books, Audio, and Visual"]
       ]
    },
