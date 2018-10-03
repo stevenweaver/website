@@ -18,8 +18,7 @@ export default {
   methods: {
     loadObservable () {
 			Runtime.load(notebook, (cell) => {
-				console.log(cell.name);
-				if (cell.name === undefined) {
+				if (cell.name == 'phylotree') {
 					return new Inspector(document.getElementById("value"));
 				}
 			});

@@ -1,8 +1,8 @@
-
-
 <p id="sw-image">
   <img src="./s2.jpg" />
 </p>
+
+<fractal/>
 
 ## Steven Weaver
 
@@ -19,5 +19,4 @@ user-friendly web applications.
 In addition, I am responsible for the configuration and maintenance of high
 performance computing environments in datacenters at the San Diego
 Supercomputing Center and Temple University.
-
 
