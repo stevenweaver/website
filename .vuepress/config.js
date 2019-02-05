@@ -4,7 +4,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Github', link: 'https://github.com/stevenweaver' },
-      { text: 'Twitter', link: 'https://twitter.com/maximumsteve' },
+      { text: 'Twitter', link: 'https://twitter.com/stvnwvr' },
     ],
     sidebar: {
       '/av/': [
