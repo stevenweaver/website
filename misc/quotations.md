@@ -47,13 +47,13 @@
 
 ### Werner Herzog
 > Before we start, are there any philosophical insights you'd like to 
-give your readers so they might sleep easier at nights? 
-
-Well, let me say just this, something for human beings everywhere, 
-whether they be filmmakers or otherwise. I can answer your ques- 
-tion only by quoting hotel mogul Conrad Hilton, who was once 
-asked what he would like to pass on to posterity. 'Whenever you 
-take a shower, always make sure the curtain is inside the tub,' he 
-said. So I sit here and recommend to people the same. Never ever 
-forget the shower curtain. 
+> give your readers so they might sleep easier at nights? 
+> 
+> Well, let me say just this, something for human beings everywhere, 
+> whether they be filmmakers or otherwise. I can answer your question 
+> only by quoting hotel mogul Conrad Hilton, who was once 
+> asked what he would like to pass on to posterity. 'Whenever you 
+> take a shower, always make sure the curtain is inside the tub,' he 
+> said. So I sit here and recommend to people the same. Never ever 
+> forget the shower curtain. 
 
