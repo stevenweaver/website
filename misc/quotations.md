@@ -46,7 +46,7 @@
 > Yes try try. Am I forever to be sabotaged by good intentions?
 
 ### Werner Herzog
-Before we start, are there any philosophical insights you'd like to 
+> Before we start, are there any philosophical insights you'd like to 
 give your readers so they might sleep easier at nights? 
 
 Well, let me say just this, something for human beings everywhere, 
