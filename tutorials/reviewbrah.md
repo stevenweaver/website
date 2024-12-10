@@ -328,7 +328,9 @@ cargo install youtube-transcript
 
 I then tested the installation by downloading a single transcript:
 
+```
 youtube-transcript "https://www.youtube.com/watch?v=V4PO9nsW3aU" > reviewbrah2.txt
+```
 
 At this point, reviewbrah2.txt contains raw transcript text of the single video.
 
@@ -336,7 +338,9 @@ At this point, reviewbrah2.txt contains raw transcript text of the single video.
 
 I used yt-dlp to retrieve a list of videos from the channel
 
+```
 yt-dlp -s --flat-playlist --print-to-file url list.txt "https://www.youtube.com/@TheReportOfTheWeek/videos"
+```
 
 Your list.txt might look like:
 
@@ -393,7 +397,9 @@ Now each transcript starts with its upload date
 
 The LLM prompt must be precise so the model outputs only a markdown table. You may need to experiment to remove headers or other extraneous text. For example:
 
+```
 llm --system "Output only a markdown table with rows of data for columns: Reviewed Item, Restaurant, Cost, Rating, Review Date. Do not include a header row or any text other than the table rows themselves." --save reviewbrah
+```
 
 I had to adjust this prompt a bit to get the desired output format, and even then there would be some inconsistencies from time to time.
 
@@ -414,7 +420,9 @@ At this stage, you have a combined table spanning multiple videos, but it may st
 
 Perform a final cleanup step to ensure dates follow YYYY-MM-DD format and that no extraneous text remains:
 
+```
 cat combined_output.txt | llm --system "Clean this output up and make a singular markdown file from it, ensure all dates follow YYYY-MM-DD format. Only output the markdown table." > table.md
+```
 
 table.md now contains a unified markdown table. All dates are normalized, and the table is ready to publish.
 
