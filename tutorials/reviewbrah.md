@@ -332,7 +332,7 @@ youtube-transcript "https://www.youtube.com/watch?v=V4PO9nsW3aU" > reviewbrah2.t
 
 At this point, reviewbrah2.txt contains raw transcript text of the single video.
 
-## Step 2: Listing All Videos in a Channel
+### Step 2: Listing All Videos in a Channel
 
 I used yt-dlp to retrieve a list of videos from the channel
 
@@ -349,7 +349,7 @@ https://www.youtube.com/watch?v=V4PO9nsW3aU
 
 Each line includes only the corresponding video URL.
 
-## Step 3: Downloading Transcripts for Each Video
+### Step 3: Downloading Transcripts for Each Video
 
 Use a loop to process every URL in list.txt and download the corresponding transcripts:
 
@@ -362,7 +362,7 @@ done < list.txt
 
 Now you have `\*\_output.txt` transcript for each video.
 
-## Step 4: Prepending the Upload Date to Each Transcript
+### Step 4: Prepending the Upload Date to Each Transcript
 
 Next, prepend the corresponding upload date to the top of each transcript file:
 
@@ -389,7 +389,7 @@ done < list.txt
 
 Now each transcript starts with its upload date
 
-## Step 5: Crafting a Custom LLM Prompt
+### Step 5: Crafting a Custom LLM Prompt
 
 The LLM prompt must be precise so the model outputs only a markdown table. You may need to experiment to remove headers or other extraneous text. For example:
 
@@ -397,7 +397,7 @@ llm --system "Output only a markdown table with rows of data for columns: Review
 
 I had to adjust this prompt a bit to get the desired output format, and even then there would be some inconsistencies from time to time.
 
-## Step 6: Feeding Transcripts into the LLM
+### Step 6: Feeding Transcripts into the LLM
 
 Combine the transcript files with list.txt and feed them into the LLM using the refined prompt:
 
@@ -410,7 +410,7 @@ done < list.txt | tee -a combined_output.txt
 
 At this stage, you have a combined table spanning multiple videos, but it may still need cleanup due to inconsistencies in llm output, but just use llm again to clean up its mess.
 
-## Step 7: Cleaning and Normalizing the Final Table
+### Step 7: Cleaning and Normalizing the Final Table
 
 Perform a final cleanup step to ensure dates follow YYYY-MM-DD format and that no extraneous text remains:
 
@@ -418,7 +418,7 @@ cat combined_output.txt | llm --system "Clean this output up and make a singular
 
 table.md now contains a unified markdown table. All dates are normalized, and the table is ready to publish.
 
-## Conclusion
+### Conclusion
 
 By combining:
 • youtube-transcript to extract text

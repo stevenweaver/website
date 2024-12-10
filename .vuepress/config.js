@@ -18,7 +18,6 @@ module.exports = {
         ["misc/quotations", "Quotes"],
         ["tutorials/reviewbrah", "Tutorials - Review Brah Ratings"],
         ["tutorials/kraken", "Tutorials - Kraken"],
-        ["tutorials/phylotree", "Tutorials - Phylotree"],
         ["av/", "Books, Audio, and Visual"],
       ],
     },
