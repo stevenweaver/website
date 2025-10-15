@@ -4,7 +4,7 @@
 	const sidebarSections = [
 		{
 			items: [
-				{ text: 'Publications', link: '/publications' },
+				{ text: 'Publications', link: '/publications' }
 			]
 		},
 		{
@@ -15,9 +15,17 @@
 			]
 		},
 		{
+			title: 'Books, Audio & Visual',
+			items: [
+				{ text: 'Overview', link: '/av' },
+				{ text: 'Does the Internet Dream?', link: '/av/does-the-internet-dream' },
+				{ text: 'Bubblegum Crisis Goofs', link: '/av/bubblegum-crisis-goofs' },
+				{ text: 'Home Videos', link: '/av/home-videos' }
+			]
+		},
+		{
 			title: 'Misc',
 			items: [
-				{ text: 'Books, Audio & Visual', link: '/av' },
 				{ text: 'Quotes', link: '/misc/quotations' }
 			]
 		}

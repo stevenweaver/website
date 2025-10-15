@@ -62,3 +62,37 @@ The original VuePress configuration and theme files have been moved to `.vuepres
 ## Development
 
 The site runs on http://localhost:5173/ in development mode and builds successfully with no errors (only minor accessibility warnings for iframe titles).
+
+## Deployment
+
+### Automatic Deployment Script
+
+A deployment script has been created to build and deploy the static site to NearlyFreeSpeech.Net:
+
+```bash
+# Deploy the site
+yarn deploy
+# or
+./deploy.sh
+```
+
+The script will:
+1. Build the site using `yarn build`
+2. Create a static site in the `build/` directory
+3. Use `rsync` to deploy to `maximumsteve_stevenweaver@ssh.nyc1.nearlyfreespeech.net:/home/public/`
+
+### Manual Deployment
+
+If you prefer to deploy manually:
+
+```bash
+# Build the site
+yarn build
+
+# Deploy with rsync
+rsync -avz --delete build/ maximumsteve_stevenweaver@ssh.nyc1.nearlyfreespeech.net:/home/public/
+```
+
+### Configuration
+
+The static site adapter is configured in `svelte.config.js` to output to the `build/` directory. All pages are pre-rendered at build time for optimal performance.
