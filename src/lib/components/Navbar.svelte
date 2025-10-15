@@ -7,7 +7,9 @@
 
 <nav class="navbar">
 	<div class="navbar-inner">
-		<h1 class="site-title">Steven Weaver</h1>
+		<h1 class="site-title">
+			<a href="/" class="site-title-link">Steven Weaver</a>
+		</h1>
 		<div class="nav-links">
 			{#each navLinks as { text, link }}
 				<a href={link} class="nav-link">{text}</a>
@@ -38,6 +40,16 @@
 		font-weight: 600;
 		margin: 0;
 		line-height: 1.5;
+	}
+
+	.site-title-link {
+		color: #2c3e50;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.site-title-link:hover {
+		color: #3eaf7c;
 	}
 
 	.nav-links {
