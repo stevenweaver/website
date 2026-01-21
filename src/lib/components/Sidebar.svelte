@@ -4,7 +4,8 @@
 	const sidebarSections = [
 		{
 			items: [
-				{ text: 'Publications', link: '/publications' }
+				{ text: 'Publications', link: '/publications' },
+				{ text: 'CV', link: 'https://www.stevenweaver.org/cv/', external: true }
 			]
 		},
 		{
@@ -43,6 +44,8 @@
 					href={item.link}
 					class="sidebar-link"
 					class:active={$page.url.pathname === item.link}
+					target={item.external ? '_blank' : undefined}
+					rel={item.external ? 'noopener noreferrer' : undefined}
 				>
 					{item.text}
 				</a>

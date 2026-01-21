@@ -11,7 +11,7 @@
 ## Steven Weaver
 
 I'm a Senior Programming Analyst in the Institute for Genomics and Evolutionary
-Medicine at Temple University.
+Medicine at Temple University. View my [CV](https://www.stevenweaver.org/cv/).
 
 My primary interest is to build systems and applications that assist in both
 accelerating research in bioinformatics and have direct practical application in
