@@ -437,7 +437,11 @@
 
 A phrase that echoes throughout my house on weekly basis from my favorite YouTuber, ReviewBrah.
 
-<p class="rating-count">{ratings.length} ratings tracked</p>
+<p class="rating-count">{ratings.length} ratings tracked | Last updated: February 2026</p>
+
+## 2025 Year in Review
+
+Chick-fil-A dominated with the year's highest score, a **9.9** for the Pretzel Cheddar Club Sandwich, while Burger King hit rock bottom with the SpongeBob Crabby Whopper at **0.2**. The McRib returned to a 9.2, Taco Bell's Birthday Cake Churros surprised at 9.1, and Chili's Big QP Burger made the case that sit-down restaurants are now the better value play. On the other end, Chick-fil-A's reformulated fries earned a devastating 1.0, Domino's Hot Buffalo Loaded Chicken got compared to dog food, and every Mike's Hot Honey collaboration was terrible. Recurring themes: rising prices, missing ingredients, and an industry chasing brand deals over quality.
 
 <table class="sortable-table">
   <thead>
