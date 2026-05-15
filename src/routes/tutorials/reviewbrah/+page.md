@@ -860,7 +860,8 @@
     const mean = vs.reduce((s, x) => s + x, 0) / n;
     const median = n % 2 ? vs[(n - 1) / 2] : (vs[n / 2 - 1] + vs[n / 2]) / 2;
     const sd = Math.sqrt(vs.reduce((s, x) => s + (x - mean) ** 2, 0) / (n - 1));
-    return { year: y, n, mean, median, sd };
+    const sdSE = sd / Math.sqrt(2 * (n - 1)); // approx standard error of a sample SD
+    return { year: y, n, mean, median, sd, sdLo: Math.max(0, sd - 1.96 * sdSE), sdHi: sd + 1.96 * sdSE };
   });
 
   // Per-chain × year mean rating (for the yearly-trajectory small multiples)
@@ -878,15 +879,24 @@
   // Early (2017–2021) vs recent (2022–2026) mean per chain — "who soured the most"
   const EARLY = 'Early (2017–2021)';
   const RECENT = 'Recent (2022–2026)';
+  const periodStat = a => {
+    const v = a.map(d => d.rating);
+    const n = v.length;
+    if (!n) return { n: 0, mean: null, sd: 0, lo: null, hi: null };
+    const mean = v.reduce((s, x) => s + x, 0) / n;
+    const sd = n > 1 ? Math.sqrt(v.reduce((s, x) => s + (x - mean) ** 2, 0) / (n - 1)) : 0;
+    const ci = n > 1 ? 1.96 * sd / Math.sqrt(n) : 0;
+    return { n, mean, sd, lo: mean - ci, hi: mean + ci };
+  };
   const chainEarlyLate = topChains.map(rest => {
     const rs = plotData.filter(d => d.restaurant === rest);
-    const m = a => a.length ? a.reduce((s, x) => s + x.rating, 0) / a.length : null;
-    const e = rs.filter(d => d.year <= 2021);
-    const l = rs.filter(d => d.year >= 2022);
+    const e = periodStat(rs.filter(d => d.year <= 2021));
+    const l = periodStat(rs.filter(d => d.year >= 2022));
     return {
       restaurant: rest,
-      earlyMean: m(e), recentMean: m(l),
-      earlyN: e.length, recentN: l.length
+      earlyMean: e.mean, recentMean: l.mean,
+      earlyN: e.n, recentN: l.n,
+      earlyLo: e.lo, earlyHi: e.hi, recentLo: l.lo, recentHi: l.hi
     };
   }).filter(d => d.earlyMean != null && d.recentMean != null);
   const souredOrder = [...chainEarlyLate]
@@ -894,8 +904,8 @@
     .map(d => d.restaurant);
   const declineOrder = souredOrder;
   const chainEarlyLateLong = chainEarlyLate.flatMap(d => [
-    { restaurant: d.restaurant, period: EARLY, mean: d.earlyMean, n: d.earlyN },
-    { restaurant: d.restaurant, period: RECENT, mean: d.recentMean, n: d.recentN }
+    { restaurant: d.restaurant, period: EARLY, mean: d.earlyMean, n: d.earlyN, lo: d.earlyLo, hi: d.earlyHi },
+    { restaurant: d.restaurant, period: RECENT, mean: d.recentMean, n: d.recentN, lo: d.recentLo, hi: d.recentHi }
   ]);
   const periodColor = { domain: [EARLY, RECENT], range: ['#3b4cc0', '#b40426'] };
 
@@ -946,11 +956,12 @@
       x: { label: 'Year', tickFormat: 'd', interval: 1 },
       y: { domain: [0, 3.5], label: 'Std. dev. of rating ↑', grid: true },
       marks: [
-        Plot.line(yearStats, { x: 'year', y: 'sd', stroke: '#bbb', strokeWidth: 1.5 }),
-        Plot.dot(yearStats, { x: 'year', y: 'sd', fill: 'year', r: 5, stroke: 'white', strokeWidth: 0.6 }),
+        Plot.barY(yearStats, { x: 'year', y: 'sd', fill: 'year', fillOpacity: 0.85 }),
+        Plot.ruleX(yearStats, { x: 'year', y1: 'sdLo', y2: 'sdHi', stroke: '#333', strokeWidth: 1.2 }),
+        Plot.ruleY([0]),
         Plot.tip(yearStats, Plot.pointerX({
           x: 'year', y: 'sd',
-          title: d => `${d.year}  (n=${d.n})\nSD ${d.sd.toFixed(2)}\nmean ${d.mean.toFixed(2)}`
+          title: d => `${d.year}  (n=${d.n})\nSD ${d.sd.toFixed(2)}  (95% CI ${d.sdLo.toFixed(2)}–${d.sdHi.toFixed(2)})\nmean ${d.mean.toFixed(2)}`
         }))
       ]
     }));
@@ -983,7 +994,7 @@
       marks: [
         Plot.frame({ stroke: '#e0e0e0' }),
         Plot.dot(facetData, { fy: 'restaurant', x: 'date', y: 'rating', fill: 'year', r: 2.2, fillOpacity: 0.6, stroke: 'none' }),
-        Plot.linearRegressionY(facetData, { fy: 'restaurant', x: 'date', y: 'rating', stroke: '#222', strokeWidth: 1.5, ci: 0 }),
+        Plot.linearRegressionY(facetData, { fy: 'restaurant', x: 'date', y: 'rating', stroke: '#222', strokeWidth: 1.5, ci: 0.95, fillOpacity: 0.12 }),
         Plot.tip(facetData, Plot.pointer({ fy: 'restaurant', x: 'date', y: 'rating', title: ptTitle }))
       ]
     }));
@@ -1012,15 +1023,17 @@
       width: 820, height: souredOrder.length * 34 + 80,
       marginLeft: 110, marginRight: 24, marginTop: 24, marginBottom: 40,
       color: { ...periodColor, legend: true },
+      r: { range: [3, 9] },
       x: { domain: [0, 10], label: 'Mean rating →', grid: true },
       y: { domain: souredOrder, label: null },
       marks: [
         Plot.ruleX([overallMean], { stroke: '#888', strokeDasharray: '4 4' }),
-        Plot.link(chainEarlyLate, { y: 'restaurant', x1: 'earlyMean', x2: 'recentMean', stroke: '#ccc', strokeWidth: 2.5 }),
-        Plot.dot(chainEarlyLateLong, { y: 'restaurant', x: 'mean', fill: 'period', r: 5.5, stroke: 'white', strokeWidth: 1 }),
+        Plot.link(chainEarlyLate, { y: 'restaurant', x1: 'earlyMean', x2: 'recentMean', stroke: '#ddd', strokeWidth: 2 }),
+        Plot.ruleY(chainEarlyLateLong, { y: 'restaurant', x1: 'lo', x2: 'hi', stroke: 'period', strokeWidth: 1.5, strokeOpacity: 0.45 }),
+        Plot.dot(chainEarlyLateLong, { y: 'restaurant', x: 'mean', fill: 'period', r: 'n', stroke: 'white', strokeWidth: 1 }),
         Plot.tip(chainEarlyLateLong, Plot.pointer({
           y: 'restaurant', x: 'mean',
-          title: d => `${d.restaurant}\n${d.period}\nmean ${d.mean.toFixed(2)} (n=${d.n})`
+          title: d => `${d.restaurant}\n${d.period}\nmean ${d.mean.toFixed(2)} (n=${d.n})\n95% CI ${d.lo.toFixed(2)}–${d.hi.toFixed(2)}`
         }))
       ]
     }));
@@ -1068,13 +1081,13 @@ Across {plotData.length} ratings spanning 2017–2026, the scores drift down and
 
 <div class="plot-container" bind:this={spreadEl}></div>
 
-<p class="plot-caption">The whole thesis in one line: standard deviation of every year's ratings — how far a typical review swings from that year's average. It roughly doubles from ~1.4 in the early years to ~3 by 2025–26. Hover a year for the exact SD, mean and n.</p>
+<p class="plot-caption">Standard deviation of each year's ratings — how far a typical review swings from that year's average. Black whiskers are 95% confidence intervals on the SD estimate (wider for smaller-n years like 2026). It roughly doubles from ~1.4 in the early years to ~3 by 2025–26. Hover a year for the exact SD, CI, mean and n.</p>
 
 ## By Chain
 
 <div class="plot-container" bind:this={chainsEl}></div>
 
-<p class="plot-caption">One panel per chain with ≥15 reviews ({topChains.length} chains, ordered by review count). Dots are individual reviews colored by year; each black line is a least-squares trend. Hover any point for details — watch which chains slid hardest.</p>
+<p class="plot-caption">One panel per chain with ≥15 reviews ({topChains.length} chains, ordered by review count). Dots are individual reviews colored by year; each black line is a least-squares trend with a shaded 95% confidence band — a wide band means the slope is weakly determined. Caveat: all panels share one global time axis, so a chain reviewed mostly in later (lower-rated) years can show a downward slope even if its own quality held steady. Hover any point for details.</p>
 
 ## Yearly Average by Chain
 
@@ -1086,13 +1099,13 @@ Across {plotData.length} ratings spanning 2017–2026, the scores drift down and
 
 <div class="plot-container" bind:this={souredEl}></div>
 
-<p class="plot-caption">The trajectory above shows the shape; this is the verdict. Each chain's mean rating early (2017–2021, blue) vs recent (2022–2026, red); the bar is the swing. Sorted by biggest drop at top. Dashed line is the all-time mean ({overallMean.toFixed(2)}). Hover a dot for the exact mean and sample size.</p>
+<p class="plot-caption">The trajectory above shows the shape; this is the verdict. Each chain's mean rating early (2017–2021, blue) vs recent (2022–2026, red); dot size ∝ number of reviews and the faint colored whiskers are 95% confidence intervals on each mean. Read the ranking with that uncertainty in mind — a big swing on a small dot with wide whiskers is weak evidence. Sorted by biggest drop at top; dashed line is the all-time mean ({overallMean.toFixed(2)}). Hover a dot for mean, n and CI.</p>
 
 ## Price Over Time
 
 <div class="plot-container" bind:this={priceEl}></div>
 
-<p class="plot-caption">Every priced review ({priceData.length} with a parseable dollar amount, ≤ $30) plotted by date, colored by year. The black line is a least-squares fit with a 95% confidence band — the upward slope is fast-food inflation in one picture. Hover any point for the item, chain, date and price.</p>
+<p class="plot-caption">Every priced review ({priceData.length} with a parseable dollar amount, ≤ $30) plotted by date, colored by year. The black line is a least-squares fit with a 95% confidence band. The upward slope is real (it tracks known fast-food CPI), but treat the band as a lower bound on uncertainty: prices were parsed from messy free-text ("~$22", "$6–$8", "Included") and the ≤ $30 filter drops combo/range outliers, so true uncertainty is wider than shown. Hover any point for the item, chain, date and price.</p>
 
 <table class="sortable-table">
   <thead>
