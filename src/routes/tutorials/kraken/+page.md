@@ -43,7 +43,7 @@ use tools like Kraken Report.
 4. Run and profit
 
 Let's take a look at the top hits
-![Illumina Results](../assets/illumina_results.png)
+![Illumina Results](/assets/illumina_results.png)
 
 
 First, we must be able to interpret each column
@@ -58,7 +58,7 @@ We can see that of the species classified, 228210 were Alteromonas macleodii str
 599478 was not classified at all.
 
 454 Results
-![454 Results](../assets/454_results.png)
+![454 Results](/assets/454_results.png)
 With the 454 dataset, we see that Kraken was able to classify 97.17% as Sulfolobus tokodaii str. 7.
 
 
@@ -78,21 +78,21 @@ and Q is the number of k-mers in the sequence that lack an ambiguous nucleotide
 
 
 Notice that the results are not as granular, and that we lose quite a bit of classification, by setting the filtering score to .2
-![Illumina Filter](../assets/illumina_filter.png)
+![Illumina Filter](/assets/illumina_filter.png)
 
 Filtering on 454 data isn't as drastic, but it is still substantial
-![454 Filter](../assets/454_filter.png)
+![454 Filter](/assets/454_filter.png)
 
 If we elect to filter and sort data using Galaxy, we can use filter based on
 column 4 (the rank code), and then select sort on number of reads covered by the
 clade rooted at the taxon. An example using species on the Illumina dataset is
 shown below:
 
-![Illumina Species](../assets/illumina_species.png)
+![Illumina Species](/assets/illumina_species.png)
 
 
 And if we sort by Family (please note you want to sort by the *second* column)
-<!--![Illumina Family](../assets/illumina_family.png)-->
+<!--![Illumina Family](/assets/illumina_family.png)-->
 
 I do not have a screenshot of this due to the Galaxy site being unavailable on
 Tuesday 20170509.
@@ -120,10 +120,10 @@ Notice that you will not classify data accurately at all if you are using the
 wrong database.
 
 Illumina Wrong Reference Database
-![Illumina Filter](../assets/illumina_unc.png)
+![Illumina Filter](/assets/illumina_unc.png)
 
 454 Wrong Reference Database
-![454 Filter](../assets/454_unc.png)
+![454 Filter](/assets/454_unc.png)
 
 Unfortunately, Galaxy does not report how long each job takes, so we cannot
 compare the times between the quick operation and Kraken original. We can,

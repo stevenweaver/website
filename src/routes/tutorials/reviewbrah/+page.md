@@ -1,8 +1,33 @@
 <script>
+  import { onMount } from 'svelte';
   let sortCol = $state('date');
   let sortAsc = $state(false);
+  let timelineEl = $state();
+  let yearEl = $state();
+  let spreadEl = $state();
+  let priceEl = $state();
+  let chainsEl = $state();
+  let eraEl = $state();
+  let souredEl = $state();
 
   const ratings = [
+    {item:"Barbecue Bounty Whopper",restaurant:"Burger King",cost:"$10.99",rating:"8.5",date:"2026-05-04"},
+    {item:"Grogu's Garlic Chicken Fries",restaurant:"Burger King",cost:"$5.50",rating:"4",date:"2026-05-04"},
+    {item:"Imperial Cheddar Ranch Tots",restaurant:"Burger King",cost:"$2.50",rating:"7.6",date:"2026-05-04"},
+    {item:"Grogu's Blue Cookie Shake",restaurant:"Burger King",cost:"$6.00",rating:"6.6",date:"2026-05-04"},
+    {item:"Diablo Dusted Crispy Chicken Nuggets",restaurant:"Taco Bell",cost:"$5.00",rating:"0.3",date:"2026-04-25"},
+    {item:"Updated Spicy Chicken Sandwich",restaurant:"Wendy's",cost:"$7.30",rating:"2",date:"2026-04-17"},
+    {item:"HUNTR/X Meal",restaurant:"McDonald's",cost:"$11.50",rating:"7.5",date:"2026-04-10"},
+    {item:"Crispy Chicken Crunch Wrap Slider",restaurant:"Taco Bell",cost:"$3.70",rating:"0",date:"2026-04-02"},
+    {item:"Jalapeno Ranch Club Sandwich",restaurant:"Chick-fil-A",cost:"$11.00",rating:"8",date:"2026-03-26"},
+    {item:"New And Improved Whopper",restaurant:"Burger King",cost:"$9.00",rating:"8.7",date:"2026-03-15"},
+    {item:"Big Arch",restaurant:"McDonald's",cost:"$11.00",rating:"8.5",date:"2026-03-03"},
+    {item:"Reimagined Pan Pizza",restaurant:"Papa John's",cost:"$18.00",rating:"4",date:"2026-02-23"},
+    {item:"Crispy Chicken Nuggets",restaurant:"Taco Bell",cost:"$6.00",rating:"8.5",date:"2026-02-12"},
+    {item:"Diablo Ranch Sauce",restaurant:"Taco Bell",cost:"-",rating:"8",date:"2026-02-12"},
+    {item:"Bacon Hot Honey Chicken McCrispy Sandwich",restaurant:"McDonald's",cost:"$8.20",rating:"2",date:"2026-01-30"},
+    {item:"All-American Smasher Meal",restaurant:"Sonic",cost:"$6.00",rating:"9.1",date:"2026-01-23"},
+    {item:"Volcano Quesarito",restaurant:"Taco Bell",cost:"$5.50",rating:"7",date:"2026-01-16"},
     {item:"SpongeBob's Crabby Whopper",restaurant:"Burger King",cost:"$8.50",rating:"0.2",date:"2025-12-15"},
     {item:"Mr. Krabs' Cheesy Bacon Tots",restaurant:"Burger King",cost:"$3",rating:"8.0",date:"2025-12-15"},
     {item:"Steak & Poblano Rolled Quesadilla",restaurant:"Taco Bell",cost:"$5.69",rating:"8.6",date:"2025-12-10"},
@@ -353,24 +378,410 @@
     {item:"Beyond Fried Chicken",restaurant:"KFC",cost:"$7.00",rating:"0.5",date:"2022-01-12"},
     {item:"Little Caesars Pizza",restaurant:"Little Caesars",cost:"$5.55",rating:"6.7",date:"2022-01-05"},
     {item:"Marketing and Deception",restaurant:"Little Caesars",cost:"$5.55",rating:"2.0",date:"2022-01-05"},
+    {item:"New York Style Pizza",restaurant:"Papa John's",cost:"$13.00",rating:"7.7",date:"2021-12-31"},
     {item:"New York Style Pizza",restaurant:"Papa John's",cost:"$13.00",rating:"7.7",date:"2021-12-27"},
+    {item:"Chipotle Cheddar Chalupa",restaurant:"Taco Bell",cost:"$3.89",rating:"5",date:"2021-12-27"},
     {item:"Spicy Tender Sandwich",restaurant:"PDQ",cost:"$7.25",rating:"5.7",date:"2021-12-22"},
+    {item:"Mariah Menu Cheeseburger",restaurant:"McDonald's",cost:"-",rating:"6",date:"2021-12-18"},
     {item:"Small Fries",restaurant:"Wendy's",cost:"$1.69",rating:"7.7",date:"2021-12-10"},
     {item:"Medium Fries",restaurant:"McDonald's",cost:"$3.19",rating:"7.9",date:"2021-12-10"},
+    {item:"Large Fries",restaurant:"Burger King",cost:"$2.39",rating:"4",date:"2021-12-10"},
+    {item:"Triple Treat Box",restaurant:"Pizza Hut",cost:"$25.50",rating:"7.5",date:"2021-12-06"},
+    {item:"Orange Szechuan Wings",restaurant:"Wingstop",cost:"$15.00",rating:"8",date:"2021-12-02"},
     {item:"Cheetos Boneless Wings",restaurant:"Applebee's",cost:"$11.99",rating:"6.5",date:"2021-11-27"},
+    {item:"Cheetos Flamin' Hot Boneless Wings",restaurant:"Applebee's",cost:"$11.99",rating:"6.5",date:"2021-11-27"},
     {item:"Italian Original Chicken Sandwich",restaurant:"Burger King",cost:"$7.00",rating:"2",date:"2021-11-23"},
+    {item:"Double Steak Grilled Cheese Burrito",restaurant:"Taco Bell",cost:"$6.50",rating:"7.75",date:"2021-11-14"},
     {item:"McRib",restaurant:"McDonald's",cost:"$3.00 - $5.00",rating:"5",date:"2021-11-05"},
     {item:"Grilled Cheese Burrito",restaurant:"Taco Bell",cost:"$6.00",rating:"7.75",date:"2021-11-01"},
+    {item:"Classic Buffalo Boneless Wings",restaurant:"Arby's",cost:"$5.00",rating:"8.5",date:"2021-11-01"},
+    {item:"Hot Honey Boneless Wings",restaurant:"Arby's",cost:"$5.00",rating:"8",date:"2021-11-01"},
     {item:"Triple Bacon Pizza",restaurant:"Papa John's",cost:"$13.00",rating:"8.2",date:"2021-10-27"},
+    {item:"Hottie Chicken Sandwich",restaurant:"Popeyes",cost:"$3.50",rating:"8",date:"2021-10-19"},
     {item:"Ghost Pepper Chicken Nuggets",restaurant:"Burger King",cost:"$1.49 (8 pcs)",rating:"5.4",date:"2021-10-13"},
+    {item:"Ghost Pepper Nuggets",restaurant:"Burger King",cost:"$1.00",rating:"5.4",date:"2021-10-13"},
     {item:"Cantina Crispy Melt Taco",restaurant:"Taco Bell",cost:"$2.19",rating:"7.7",date:"2021-10-08"},
+    {item:"Doritos Spicy Sweet Chili Wings",restaurant:"Buffalo Wild Wings",cost:"$10.00",rating:"5",date:"2021-10-02"},
+    {item:"Rodeo Burger",restaurant:"Burger King",cost:"$1.00",rating:"8",date:"2021-09-28"},
+    {item:"Signature Sandwich",restaurant:"Zaxby's",cost:"$7.39",rating:"8.5",date:"2021-09-21"},
     {item:"Detroit Style Pizza",restaurant:"Pizza Hut",cost:"$13.00",rating:"9",date:"2021-09-15"},
     {item:"Big Bacon Cheddar Cheeseburger",restaurant:"Wendy's",cost:"$7.00",rating:"7.8",date:"2021-09-09"},
     {item:"Crispy Chicken Sandwich Taco",restaurant:"Taco Bell",cost:"$2.49",rating:"5.5",date:"2021-09-04"},
+    {item:"Crispy Chicken Sandwich Taco (Spicy)",restaurant:"Taco Bell",cost:"$2.49",rating:"5.5",date:"2021-09-04"},
     {item:"Chakaroni Pizza",restaurant:"Papa John's",cost:"$13.00",rating:"8",date:"2021-09-01"},
+    {item:"Shaq-a-Roni Pizza",restaurant:"Papa John's",cost:"$13.00",rating:"8",date:"2021-09-01"},
     {item:"Loaded Taco Fries Burrito",restaurant:"Taco Bell",cost:"$3.00",rating:"6",date:"2021-08-26"},
     {item:"Crazy Calzone Pepperoni",restaurant:"Little Caesars",cost:"$8.50",rating:"7.4",date:"2021-08-19"},
-    {item:"Big Dinner Box",restaurant:"Pizza Hut",cost:"$23.00",rating:"8.3",date:"2021-08-14"}
+    {item:"Crazy Calzony Pepperoni",restaurant:"Little Caesars",cost:"$8.50",rating:"7.4",date:"2021-08-19"},
+    {item:"Big Dinner Box",restaurant:"Pizza Hut",cost:"$23.00",rating:"8.3",date:"2021-08-14"},
+    {item:"Saweetie Meal",restaurant:"McDonald's",cost:"$12.00",rating:"8",date:"2021-08-09"},
+    {item:"Garlic Bacon King",restaurant:"Burger King",cost:"$8.00",rating:"7.3",date:"2021-08-04"},
+    {item:"Chicken Nuggets",restaurant:"Popeyes",cost:"$10.00",rating:"6",date:"2021-07-29"},
+    {item:"Unknown Chicken Sandwich",restaurant:"Buffalo Wild Wings",cost:"$5.99",rating:"2",date:"2021-07-20"},
+    {item:"Ghost Pepper Ranch Sauce",restaurant:"Wendy's",cost:"-",rating:"6.7",date:"2021-07-16"},
+    {item:"Single Bacon King",restaurant:"Burger King",cost:"$5.49",rating:"5.8",date:"2021-07-11"},
+    {item:"Bacon Burger",restaurant:"Five Guys",cost:"$11.00",rating:"9",date:"2021-07-07"},
+    {item:"Cajun Fries",restaurant:"Five Guys",cost:"$5.00",rating:"8",date:"2021-07-07"},
+    {item:"Vanilla Shake",restaurant:"Five Guys",cost:"$6.00",rating:"7.5",date:"2021-07-07"},
+    {item:"Premium Chicken Nuggets",restaurant:"Arby's",cost:"$5.19",rating:"6.5",date:"2021-07-02"},
+    {item:"Grande Crunchwrap",restaurant:"Taco Bell",cost:"$3.49",rating:"7",date:"2021-06-26"},
+    {item:"Ch'King Sandwich",restaurant:"Burger King",cost:"$5.82",rating:"5",date:"2021-06-21"},
+    {item:"Pepperoni and Cheese Stuffed Crust Pizza",restaurant:"Little Caesars",cost:"$10.00",rating:"7",date:"2021-06-16"},
+    {item:"Naked Chicken Chalupa",restaurant:"Taco Bell",cost:"$3.49",rating:"7",date:"2021-06-09"},
+    {item:"The Edge Pizza",restaurant:"Pizza Hut",cost:"$13.00",rating:"8.5",date:"2021-06-03"},
+    {item:"BTS Meal",restaurant:"McDonald's",cost:"$8.50",rating:"8.5",date:"2021-05-26"},
+    {item:"Parmesan Crusted Papadia",restaurant:"Papa John's",cost:"$7.00",rating:"6.0",date:"2021-05-20"},
+    {item:"Spicy Deluxe Ch'King Sandwich",restaurant:"Burger King",cost:"$5.82",rating:"2",date:"2021-05-14"},
+    {item:"Bourbon Bacon Cheeseburger",restaurant:"Wendy's",cost:"$6.00",rating:"8.0",date:"2021-05-08"},
+    {item:"Dream Burger",restaurant:"MrBeast Burger",cost:"$6.99",rating:"8.0",date:"2021-04-27"},
+    {item:"Deluxe Crispy Chicken Sandwich",restaurant:"McDonald's",cost:"$5.00",rating:"7.3",date:"2021-04-23"},
+    {item:"Beefy Potato-Rito",restaurant:"Taco Bell",cost:"$1.00",rating:"8.8",date:"2021-04-18"},
+    {item:"Shack Burger (Double)",restaurant:"Shake Shack",cost:"$9.00",rating:"9",date:"2021-04-10"},
+    {item:"French Fries",restaurant:"Shake Shack",cost:"$3.00",rating:"6.5",date:"2021-04-10"},
+    {item:"Vanilla Shake",restaurant:"Shake Shack",cost:"$6.00",rating:"7",date:"2021-04-10"},
+    {item:"Spicy Greek Gyro",restaurant:"Arby's",cost:"$3.50",rating:"6.8",date:"2021-04-06"},
+    {item:"Crinkle Fries",restaurant:"Arby's",cost:"$1.00",rating:"7.5",date:"2021-04-06"},
+    {item:"Extra Most Bestest Thin Crust Pizza",restaurant:"Little Caesars",cost:"$6.49",rating:"8.2",date:"2021-04-01"},
+    {item:"BBQ Crispy Chicken Taco",restaurant:"Del Taco",cost:"$1.00",rating:"9",date:"2021-03-29"},
+    {item:"Bacon Double Stack",restaurant:"Wendy's",cost:"$3.99",rating:"6.8",date:"2021-03-25"},
+    {item:"Classic Chicken Sandwich",restaurant:"KFC",cost:"$4.99",rating:"6.4",date:"2021-03-19"},
+    {item:"Quesalupa",restaurant:"Taco Bell",cost:"$3.00",rating:"7",date:"2021-03-14"},
+    {item:"Sourdough King",restaurant:"Burger King",cost:"$8.00",rating:"6.5",date:"2021-03-09"},
+    {item:"Jalapeno Popper Chicken Sandwich",restaurant:"Wendy's",cost:"$7.00",rating:"7.7",date:"2021-03-03"},
+    {item:"Crispy Chicken Sandwich",restaurant:"McDonald's",cost:"$6.00",rating:"7.5",date:"2021-02-24"},
+    {item:"Spicy Crispy Chicken Sandwich",restaurant:"McDonald's",cost:"$6.00",rating:"8",date:"2021-02-24"},
+    {item:"Shamrock Shake",restaurant:"McDonald's",cost:"$3.99",rating:"6.5",date:"2021-02-15"},
+    {item:"Cajun Flounder Sandwich",restaurant:"Popeyes",cost:"$8.00",rating:"7.4",date:"2021-02-10"},
+    {item:"Pepperoni Pizza Melt",restaurant:"Red Baron",cost:"$3.00",rating:"8",date:"2021-02-06"},
+    {item:"Spicy Chicken McNuggets",restaurant:"McDonald's",cost:"$6.00",rating:"9.3",date:"2021-02-01"},
+    {item:"Detroit Style Pizza",restaurant:"Pizza Hut",cost:"$10.99",rating:"9",date:"2021-01-27"},
+    {item:"Pepperoni Flatbread Pizza",restaurant:"Panera Bread",cost:"$11.00",rating:"8.6",date:"2021-01-22"},
+    {item:"Ultra Watermelon Energy Drink",restaurant:"Monster",cost:"$3.00",rating:"7.0",date:"2021-01-18"},
+    {item:"Rip'n Chicken Big Box",restaurant:"Popeyes",cost:"$6.00",rating:"8.4",date:"2021-01-12"},
+    {item:"Bacon Club Chalupa",restaurant:"Taco Bell",cost:"$3.49",rating:"3",date:"2021-01-08"},
+    {item:"Epic Stuffed Crust Pizza",restaurant:"Papa John's",cost:"$12.00",rating:"8.7",date:"2021-01-03"},
+    {item:"Beast Style Burger",restaurant:"MrBeast Burger",cost:"$6.99",rating:"7",date:"2020-12-20"},
+    {item:"Triple Treat Box",restaurant:"Pizza Hut",cost:"$20.99",rating:"8.5",date:"2020-12-14"},
+    {item:"McRib",restaurant:"McDonald's",cost:"$3.70",rating:"7.5",date:"2020-12-04"},
+    {item:"Pizza Wings",restaurant:"Buffalo Wild Wings",cost:"$10.00",rating:"5.7",date:"2020-11-29"},
+    {item:"Cheeser! Cheeser! Pizza",restaurant:"Little Caesars",cost:"$7.00",rating:"8.0",date:"2020-11-24"},
+    {item:"Deep Fried Turkey Club Sandwich",restaurant:"Arby's",cost:"$9.00",rating:"5.5",date:"2020-11-21"},
+    {item:"Beyond Italian Sausage Pizza",restaurant:"Pizza Hut",cost:"$14.99",rating:"9",date:"2020-11-16"},
+    {item:"Toasted Cheddar Chalupa",restaurant:"Taco Bell",cost:"$2.99",rating:"7",date:"2020-11-10"},
+    {item:"Twisty Wicked Shrimp",restaurant:"Popeyes",cost:"$5.00",rating:"8.25",date:"2020-11-06"},
+    {item:"Halloween Doughnuts",restaurant:"Krispy Kreme",cost:"$7.00",rating:"6.7",date:"2020-10-31"},
+    {item:"Double Cheeseburger Papadia",restaurant:"Papa John's",cost:"$8.00",rating:"4",date:"2020-10-27"},
+    {item:"Classic Chicken Sandwich",restaurant:"Wendy's",cost:"$5.40",rating:"7",date:"2020-10-23"},
+    {item:"Spicy Ghost Pepper Donut",restaurant:"Dunkin'",cost:"$1.00",rating:"8.5",date:"2020-10-18"},
+    {item:"Slices-N-Stix",restaurant:"Little Caesars",cost:"$6.00",rating:"8.2",date:"2020-10-11"},
+    {item:"J Balvin Meal",restaurant:"McDonald's",cost:"$6.00",rating:"7.5",date:"2020-10-05"},
+    {item:"Pretzel Bacon Pub Cheeseburger",restaurant:"Wendy's",cost:"$5.39",rating:"9",date:"2020-10-02"},
+    {item:"Grande Stacker",restaurant:"Taco Bell",cost:"$2.49",rating:"4.1",date:"2020-09-29"},
+    {item:"Ghost Pepper Wings",restaurant:"Popeyes",cost:"$13.00",rating:"6.8",date:"2020-09-25"},
+    {item:"Spicy Chicken Nuggets",restaurant:"McDonald's",cost:"$3.19",rating:"8.8",date:"2020-09-20"},
+    {item:"Spicy Chicken Nuggets",restaurant:"Wendy's",cost:"$1.00",rating:"8.6",date:"2020-09-20"},
+    {item:"Spicy Chicken Nuggets",restaurant:"Burger King",cost:"$1.00",rating:"8.1",date:"2020-09-20"},
+    {item:"Travis Scott Meal",restaurant:"McDonald's",cost:"$6.00",rating:"8.6",date:"2020-09-08"},
+    {item:"Grilled Buffalo Chicken Papadia",restaurant:"Papa John's",cost:"$6.00",rating:"7",date:"2020-09-03"},
+    {item:"Beef Burrito",restaurant:"Taco Bell",cost:"$1.00",rating:"8",date:"2020-08-29"},
+    {item:"Chicken Taco Pizza",restaurant:"Domino's",cost:"$11.99",rating:"9",date:"2020-08-25"},
+    {item:"Honey Sesame Chicken",restaurant:"Panda Express",cost:"$7.80",rating:"8.6",date:"2020-08-20"},
+    {item:"Spicy Crispy Chicken Sandwich",restaurant:"Wendy's",cost:"$1.29",rating:"8.5",date:"2020-08-15"},
+    {item:"Hot Honey Bone-In Chicken",restaurant:"Popeyes",cost:"$5.00",rating:"7",date:"2020-08-09"},
+    {item:"Crispy Chicken Taco",restaurant:"Del Taco",cost:"$1.00",rating:"6",date:"2020-08-03"},
+    {item:"Beer Battered Fish Sandwich",restaurant:"Arby's",cost:"$5.69",rating:"7",date:"2020-07-30"},
+    {item:"Steakhouse King",restaurant:"Burger King",cost:"$6.00",rating:"8.1",date:"2020-07-25"},
+    {item:"Hot Buffalo Wings (10 piece)",restaurant:"Domino's",cost:"$7.99",rating:"8.4",date:"2020-07-20"},
+    {item:"Secret Recipe Fries",restaurant:"KFC",cost:"$2.49",rating:"6",date:"2020-07-15"},
+    {item:"Classic Crust Four Cheese Pizza",restaurant:"Red Baron",cost:"$4.00",rating:"7.7",date:"2020-07-11"},
+    {item:"Grilled Cheese Burrito",restaurant:"Taco Bell",cost:"$2.99",rating:"8.5",date:"2020-07-06"},
+    {item:"Shaq-a-Roni Pizza",restaurant:"Papa John's",cost:"$12.00",rating:"8",date:"2020-07-02"},
+    {item:"Croissant Crust Pizza (Pepperoni)",restaurant:"DiGiorno",cost:"-",rating:"4.7",date:"2020-06-21"},
+    {item:"Sweet Potato Waffle Fries",restaurant:"Arby's",cost:"$2.29",rating:"5.5",date:"2020-06-17"},
+    {item:"Pineapple Whip Freeze",restaurant:"Taco Bell",cost:"$2.89",rating:"5.1",date:"2020-06-13"},
+    {item:"Chocolate Chip Cake",restaurant:"KFC",cost:"-",rating:"6.4",date:"2020-06-13"},
+    {item:"Stuffed Crazy Bread",restaurant:"Little Caesars",cost:"$3.49",rating:"8.9",date:"2020-06-07"},
+    {item:"Buffalo Ranch Tenders",restaurant:"Popeyes",cost:"$5.00",rating:"4.7",date:"2020-06-02"},
+    {item:"Cheddar Chicken Ranch Sandwich",restaurant:"Arby's",cost:"$3.99",rating:"5.9",date:"2020-05-27"},
+    {item:"Spicy Nuggets (10 piece)",restaurant:"Burger King",cost:"$1.49",rating:"8.1",date:"2020-05-20"},
+    {item:"Java Monster Mean Bean",restaurant:"Monster",cost:"$1.99",rating:"7",date:"2020-05-09"},
+    {item:"Crispy Specialty Chicken",restaurant:"Domino's",cost:"$5.00",rating:"8",date:"2020-05-03"},
+    {item:"Bacon Jalapeno Stuffed Cheesy Bread",restaurant:"Domino's",cost:"$5.00",rating:"8.7",date:"2020-05-03"},
+    {item:"Handmade Pan Pizza (Pepperoni)",restaurant:"Domino's",cost:"$7.00",rating:"8.5",date:"2020-05-03"},
+    {item:"BBQ Chicken Frozen Pizza",restaurant:"California Pizza Kitchen",cost:"$8.00",rating:"6.8",date:"2020-04-27"},
+    {item:"Flamin' Hot Doritos Locos Taco",restaurant:"Taco Bell",cost:"$2.00",rating:"9",date:"2020-04-22"},
+    {item:"Pepperoni Cheeser! Cheeser! Pizza",restaurant:"Little Caesars",cost:"$7.00",rating:"7.4",date:"2020-04-14"},
+    {item:"Bacon and Cheese Stuffed Crust Pizza",restaurant:"DiGiorno",cost:"$8.00",rating:"6.8",date:"2020-04-09"},
+    {item:"Double Big Mac",restaurant:"McDonald's",cost:"$8.60",rating:"9",date:"2020-04-03"},
+    {item:"Beef Franks in a Puff Pastry Blanket",restaurant:"Hebrew National",cost:"-",rating:"8.5",date:"2020-03-31"},
+    {item:"NightShift Sinus / Cold & Flu",restaurant:"Mucinex",cost:"$12.00",rating:"8.4",date:"2020-03-26"},
+    {item:"Deep Dish Singles Pepperoni Pizza",restaurant:"Red Baron",cost:"-",rating:"8.0",date:"2020-03-20"},
+    {item:"Big Dipper Pizza",restaurant:"Pizza Hut",cost:"$12.99",rating:"7.7",date:"2020-03-15"},
+    {item:"Breakfast Baconator",restaurant:"Wendy's",cost:"$4.00",rating:"6",date:"2020-03-10"},
+    {item:"Maple Bacon Chicken Croissant",restaurant:"Wendy's",cost:"$4.00",rating:"4.9",date:"2020-03-10"},
+    {item:"Jalapeño Popper Rolls",restaurant:"Papa John's",cost:"$5.99",rating:"5.8",date:"2020-03-06"},
+    {item:"Chicken and Donuts Sandwich",restaurant:"KFC",cost:"$5.99",rating:"6.8",date:"2020-02-27"},
+    {item:"Buffalo Chicken Nacho Fries",restaurant:"Taco Bell",cost:"$3.00",rating:"8.26",date:"2020-02-24"},
+    {item:"Buttermilk Biscuit Shrimp Combo",restaurant:"Popeyes",cost:"$6.00",rating:"9",date:"2020-02-19"},
+    {item:"Mozzarella Poppers Pizza",restaurant:"Pizza Hut",cost:"$15.00",rating:"4.1",date:"2020-02-14"},
+    {item:"Philly Cheesesteak Papadia",restaurant:"Papa John's",cost:"$8.00",rating:"6.62",date:"2020-02-09"},
+    {item:"Coca-Cola Energy",restaurant:"Coca-Cola",cost:"$2.00",rating:"9",date:"2020-02-06"},
+    {item:"Cherry Coca-Cola Energy",restaurant:"Coca-Cola",cost:"$2.00",rating:"9",date:"2020-02-06"},
+    {item:"Strawberry Jell-O",restaurant:"Jell-O",cost:"-",rating:"7.2",date:"2020-02-01"},
+    {item:"Orange Jell-O",restaurant:"Jell-O",cost:"-",rating:"7.2",date:"2020-02-01"},
+    {item:"Blue Raspberry Sour Jell-O",restaurant:"Jell-O",cost:"-",rating:"7.2",date:"2020-02-01"},
+    {item:"Cheddar Bacon King",restaurant:"Burger King",cost:"$6.49",rating:"7",date:"2020-01-21"},
+    {item:"Reaper Ranch Double Stacked Taco",restaurant:"Taco Bell",cost:"$1.00",rating:"8.3",date:"2020-01-10"},
+    {item:"Extra Cheesy Alfredo Garlic Parmesan Crust Pizza",restaurant:"Papa John's",cost:"$10.00",rating:"5.8",date:"2020-01-04"},
+    {item:"Monster Energy Ultra Paradise",restaurant:"Monster",cost:"$1.99",rating:"8.0",date:"2019-12-30"},
+    {item:"Stuffed Crust Pepperoni Pizza",restaurant:"DiGiorno",cost:"-",rating:"5",date:"2019-12-24"},
+    {item:"Double Smoked Bacon, Cheddar and Egg Sandwich",restaurant:"Starbucks",cost:"$5.00",rating:"8.8",date:"2019-12-19"},
+    {item:"Rolled Chicken Tacos",restaurant:"Taco Bell",cost:"-",rating:"7.3",date:"2019-12-14"},
+    {item:"Rising Crust Pizza",restaurant:"Freschetta",cost:"-",rating:"7.5",date:"2019-12-10"},
+    {item:"MeatZZa Pizza",restaurant:"Domino's",cost:"$7.00",rating:"7",date:"2019-12-06"},
+    {item:"Bacon BBQ Burger",restaurant:"McDonald's",cost:"$5.89",rating:"8.6",date:"2019-12-01"},
+    {item:"Snickerdoodle McFlurry (Snack Size)",restaurant:"McDonald's",cost:"$1.89",rating:"6.8",date:"2019-12-01"},
+    {item:"Nashville Hot Chicken and Waffle Sandwich",restaurant:"KFC",cost:"$6.44",rating:"1",date:"2019-11-26"},
+    {item:"Stuffed Garlic Knots Pizza",restaurant:"Pizza Hut",cost:"$14.99",rating:"5.7",date:"2019-11-22"},
+    {item:"Garlic Parmesan Crust Pizza",restaurant:"Papa John's",cost:"$10.00",rating:"6.0",date:"2019-11-13"},
+    {item:"Spicy Crispy Chicken Sandwich",restaurant:"Burger King",cost:"$4.99",rating:"4.7",date:"2019-11-04"},
+    {item:"Spicy Chicken Sandwich",restaurant:"Popeyes",cost:"-",rating:"9",date:"2019-11-04"},
+    {item:"Spicy Chicken Sandwich",restaurant:"Chick-fil-A",cost:"-",rating:"8.2",date:"2019-11-04"},
+    {item:"Spicy Chicken Sandwich",restaurant:"Wendy's",cost:"-",rating:"5.6",date:"2019-11-04"},
+    {item:"Spicy Chicken Sandwich",restaurant:"Culver's",cost:"-",rating:"3",date:"2019-11-04"},
+    {item:"Smoky Sriracha Wings",restaurant:"Pizza Hut",cost:"$7.00",rating:"8.1",date:"2019-11-02"},
+    {item:"Double Chalupa",restaurant:"Taco Bell",cost:"$3.49",rating:"3",date:"2019-10-29"},
+    {item:"Fried Oreos",restaurant:"Sonic",cost:"$3.00",rating:"5",date:"2019-10-25"},
+    {item:"Voodoo Chicken Tenders",restaurant:"Popeyes",cost:"$5.00",rating:"8.5",date:"2019-10-22"},
+    {item:"Jack-O'-Lantern Pizza",restaurant:"Papa John's",cost:"$11.00",rating:"4",date:"2019-10-16"},
+    {item:"Buffalo Kentucky Fried Wings",restaurant:"KFC",cost:"$5.00",rating:"7.1",date:"2019-10-12"},
+    {item:"Nashville Hot Kentucky Fried Wings",restaurant:"KFC",cost:"$5.00",rating:"4.9",date:"2019-10-12"},
+    {item:"Honey BBQ Kentucky Fried Wings",restaurant:"KFC",cost:"$5.00",rating:"7.1",date:"2019-10-12"},
+    {item:"McRib",restaurant:"McDonald's",cost:"$3.49",rating:"8.6",date:"2019-10-09"},
+    {item:"Honey Sesame Chicken Bowl",restaurant:"Panda Express",cost:"$6.67",rating:"8.4",date:"2019-10-06"},
+    {item:"Triple Steakburger with Bacon Meal",restaurant:"Steak 'n Shake",cost:"-",rating:"8.3",date:"2019-10-03"},
+    {item:"Monster Energy Zero Ultra",restaurant:"7-Eleven",cost:"$3.50",rating:"8",date:"2019-09-29"},
+    {item:"Pretzel Bacon King",restaurant:"Burger King",cost:"$6.49",rating:"3",date:"2019-09-24"},
+    {item:"Stuffed Cheez-It Pizza (Cheese)",restaurant:"Pizza Hut",cost:"$6.49",rating:"6",date:"2019-09-19"},
+    {item:"Stuffed Cheez-It Pizza (Pepperoni)",restaurant:"Pizza Hut",cost:"$6.49",rating:"5.2",date:"2019-09-19"},
+    {item:"Spicy BBQ Chicken Sandwich",restaurant:"McDonald's",cost:"$4.26",rating:"7.5",date:"2019-09-17"},
+    {item:"Toasted Cheddar Chalupa",restaurant:"Taco Bell",cost:"$2.49",rating:"4.9",date:"2019-09-13"},
+    {item:"Mac and Cheese",restaurant:"Chick-fil-A",cost:"$3.50",rating:"7.4",date:"2019-09-06"},
+    {item:"Spicy BBQ Glazed Tenders (6pc)",restaurant:"McDonald's",cost:"$7.00",rating:"7.0",date:"2019-09-02"},
+    {item:"Quattro Pizza",restaurant:"Little Caesars",cost:"$7.00",rating:"6.2",date:"2019-08-29"},
+    {item:"Popeyes Chicken Sandwich",restaurant:"Popeyes",cost:"$4.69",rating:"6.7",date:"2019-08-21"},
+    {item:"Chick-fil-A Chicken Sandwich",restaurant:"Chick-fil-A",cost:"$3.55",rating:"7.3",date:"2019-08-21"},
+    {item:"Triple Double Crunchwrap",restaurant:"Taco Bell",cost:"$3.49",rating:"7",date:"2019-08-17"},
+    {item:"Spicy Chicken Nuggets",restaurant:"Wendy's",cost:"$3.94",rating:"8.6",date:"2019-08-13"},
+    {item:"Impossible Whopper",restaurant:"Burger King",cost:"$5.59",rating:"8.2",date:"2019-08-08"},
+    {item:"Deluxe Burger",restaurant:"Culver's",cost:"$5.19",rating:"7",date:"2019-07-29"},
+    {item:"Wisconsin Cheese Curds",restaurant:"Culver's",cost:"$3.89",rating:"7",date:"2019-07-29"},
+    {item:"Cookies and Cream Frozen Custard",restaurant:"Culver's",cost:"$2.49",rating:"6.5",date:"2019-07-29"},
+    {item:"Bacon Jalapeno Cheeseburger",restaurant:"Wendy's",cost:"$5.99",rating:"6.1",date:"2019-07-22"},
+    {item:"Sichuan Hot Chicken (Original)",restaurant:"Panda Express",cost:"$4.00",rating:"5.4",date:"2019-07-19"},
+    {item:"Sichuan Hot Chicken (Extra Spicy)",restaurant:"Panda Express",cost:"$4.00",rating:"5.6",date:"2019-07-19"},
+    {item:"Steak Reaper Ranch Fries Supreme",restaurant:"Taco Bell",cost:"$3.79",rating:"5",date:"2019-07-15"},
+    {item:"Taco",restaurant:"Burger King",cost:"$1.00",rating:"6.85",date:"2019-07-10"},
+    {item:"Cheetos Sandwich Meal",restaurant:"KFC",cost:"$6.79",rating:"8.1",date:"2019-07-02"},
+    {item:"Sweet Lightning Mountain Dew",restaurant:"KFC",cost:"-",rating:"4.5",date:"2019-07-02"},
+    {item:"Stuffed Crust Extra Most Bestest Pizza",restaurant:"Little Caesars",cost:"$9.00",rating:"8.0",date:"2019-06-29"},
+    {item:"Rodeo King",restaurant:"Burger King",cost:"$8.00",rating:"8.1",date:"2019-06-18"},
+    {item:"Nacho Fries",restaurant:"Taco Bell",cost:"$1.30",rating:"7",date:"2019-06-13"},
+    {item:"Grand McExtreme Bacon Burger",restaurant:"McDonald's",cost:"$7.24",rating:"3",date:"2019-06-06"},
+    {item:"New Pan Pizza",restaurant:"Pizza Hut",cost:"$7.99",rating:"7.0",date:"2019-06-02"},
+    {item:"Red Bull Slush (Original)",restaurant:"Sonic",cost:"$3.00",rating:"5",date:"2019-05-24"},
+    {item:"Cherry Limeade Red Bull Slush",restaurant:"Sonic",cost:"$3.00",rating:"4",date:"2019-05-24"},
+    {item:"Grande Nachos Box",restaurant:"Taco Bell",cost:"$5.00",rating:"5.5",date:"2019-05-19"},
+    {item:"Pan Pizza",restaurant:"Domino's",cost:"$8.00",rating:"6.5",date:"2019-05-14"},
+    {item:"Ultimate Pepperoni Pizza",restaurant:"Papa John's",cost:"$12.00",rating:"9.7",date:"2019-04-27"},
+    {item:"Angry Whopper",restaurant:"Burger King",cost:"$6.20",rating:"9.4",date:"2019-04-15"},
+    {item:"BBLT Sandwich",restaurant:"Sonic",cost:"-",rating:"7.1",date:"2019-04-05"},
+    {item:"Bacon Wrapped Deep Deep Dish Pizza",restaurant:"Little Caesars",cost:"$12.00",rating:"8.55",date:"2019-04-01"},
+    {item:"Bacon Cheesy Tots",restaurant:"Burger King",cost:"$2.20",rating:"2",date:"2019-03-25"},
+    {item:"Pepperoni P'Zone",restaurant:"Pizza Hut",cost:"$5.99",rating:"8.0",date:"2019-03-21"},
+    {item:"Donut Sticks",restaurant:"McDonald's",cost:"$3.39",rating:"7.7",date:"2019-03-12"},
+    {item:"Extra Most Bestest Pizza",restaurant:"Little Caesars",cost:"$6.00",rating:"8.8",date:"2019-03-06"},
+    {item:"Steak Rattlesnake Fries Burrito",restaurant:"Taco Bell",cost:"$2.99",rating:"9.1",date:"2019-03-03"},
+    {item:"Southern Butterfly Shrimp",restaurant:"Popeyes",cost:"$5.00",rating:"8.3",date:"2019-02-22"},
+    {item:"Ultimate Cheesy Crust Pizza",restaurant:"Pizza Hut",cost:"$12.99",rating:"8.0",date:"2019-02-17"},
+    {item:"Barbecue Cheeseburger",restaurant:"Wendy's",cost:"$5.50",rating:"9.0",date:"2019-02-12"},
+    {item:"Pretzel Crust Pizza",restaurant:"Little Caesars",cost:"$6.00",rating:"6.0",date:"2019-01-30"},
+    {item:"Nacho Fries",restaurant:"Taco Bell",cost:"$1.49",rating:"9.5",date:"2019-01-26"},
+    {item:"Big King XL",restaurant:"Burger King",cost:"$6.50",rating:"8.6",date:"2019-01-19"},
+    {item:"Bacon Melt Sonic Signature Slinger",restaurant:"Sonic",cost:"$2.49",rating:"6.5",date:"2019-01-16"},
+    {item:"Nashville Hot Extra Crispy Chicken",restaurant:"KFC",cost:"$6.00",rating:"8.0",date:"2019-01-13"},
+    {item:"Naked Chicken Chalupa",restaurant:"Taco Bell",cost:"$5.49",rating:"9.0",date:"2019-01-02"},
+    {item:"Cheese Sticks",restaurant:"Papa John's",cost:"-",rating:"9.3",date:"2018-12-28"},
+    {item:"Peppermint Mocha Frappuccino",restaurant:"Starbucks",cost:"$5.00",rating:"8.6",date:"2018-12-24"},
+    {item:"Santa's Belly Donut",restaurant:"Krispy Kreme",cost:"-",rating:"7.2",date:"2018-12-24"},
+    {item:"Ugly Sweater Penguin Donut",restaurant:"Krispy Kreme",cost:"-",rating:"6.5",date:"2018-12-24"},
+    {item:"Holiday Plaid Donut",restaurant:"Krispy Kreme",cost:"-",rating:"7.5",date:"2018-12-24"},
+    {item:"Mushroom & Swiss Burger",restaurant:"McDonald's",cost:"$5.39",rating:"8.0",date:"2018-12-16"},
+    {item:"Cini Minis",restaurant:"Burger King",cost:"$1.49",rating:"8.3",date:"2018-12-08"},
+    {item:"Bacon Maple Chicken Sandwich",restaurant:"Wendy's",cost:"$5.99",rating:"8.5",date:"2018-12-04"},
+    {item:"Rolled Chicken Tacos",restaurant:"Taco Bell",cost:"-",rating:"8.0",date:"2018-11-28"},
+    {item:"Mint Chocolate Shake",restaurant:"Arby's",cost:"$2.49",rating:"7.0",date:"2018-11-25"},
+    {item:"Buffalo Chicken Sandwich",restaurant:"Arby's",cost:"$5.00",rating:"8.4",date:"2018-11-25"},
+    {item:"Holiday Turkey & Stuffing Panini",restaurant:"Starbucks",cost:"$6.25",rating:"8.6",date:"2018-11-21"},
+    {item:"Chicken and Waffle Sandwich",restaurant:"KFC",cost:"$5.99",rating:"7",date:"2018-11-18"},
+    {item:"Double Cheeseburger Pizza",restaurant:"Papa John's",cost:"$11.77",rating:"7.1",date:"2018-11-14"},
+    {item:"McRib",restaurant:"McDonald's",cost:"$3.00",rating:"7.92",date:"2018-11-09"},
+    {item:"Thin Crust Pepperoni Pizza",restaurant:"Little Caesars",cost:"$6.42",rating:"8.0",date:"2018-11-05"},
+    {item:"Superfood Side (Kale Salad)",restaurant:"Chick-fil-A",cost:"$4.19",rating:"9.0",date:"2018-10-30"},
+    {item:"Nightmare King",restaurant:"Burger King",cost:"$6.39",rating:"6.7",date:"2018-10-26"},
+    {item:"Caramel Apple Freeze",restaurant:"Taco Bell",cost:"$2.40",rating:"7.4",date:"2018-10-20"},
+    {item:"Frozen Fanta Scary Black Cherry Slush",restaurant:"Burger King",cost:"$1.00",rating:"8.8",date:"2018-10-16"},
+    {item:"S'Awesome Bacon Classic Double",restaurant:"Wendy's",cost:"$6.49",rating:"5.9",date:"2018-10-10"},
+    {item:"Beefy Crunch Burrito Duo",restaurant:"Taco Bell",cost:"$2.00",rating:"8.0",date:"2018-10-04"},
+    {item:"Bacon Smokehouse Buttermilk Crispy Chicken Sandwich",restaurant:"McDonald's",cost:"$5.00",rating:"7.2",date:"2018-10-01"},
+    {item:"Hot Honey Chicken Tenders",restaurant:"KFC",cost:"$5.49",rating:"7.0",date:"2018-09-27"},
+    {item:"Crispy Chicken Tenders",restaurant:"Burger King",cost:"$4.49",rating:"7.5",date:"2018-09-22"},
+    {item:"Triple Double Crunchwrap",restaurant:"Taco Bell",cost:"$5.97",rating:"6.5",date:"2018-09-15"},
+    {item:"Dave's Single",restaurant:"Wendy's",cost:"$5.00",rating:"8.6",date:"2018-09-12"},
+    {item:"Italian Hero Pizza",restaurant:"Papa John's",cost:"$10.00",rating:"7.0",date:"2018-09-08"},
+    {item:"Froot Loops Mini Donuts",restaurant:"Hardee's",cost:"$2.34",rating:"8.5",date:"2018-09-01"},
+    {item:"Double Cheesy Gordita Crunch",restaurant:"Taco Bell",cost:"$3.49",rating:"5.5",date:"2018-08-27"},
+    {item:"Sweet N Spicy Honey BBQ Glazed Tenders",restaurant:"McDonald's",cost:"$4.49",rating:"8.4",date:"2018-08-23"},
+    {item:"Jalapeno King Sandwich",restaurant:"Burger King",cost:"$5.69",rating:"6.7",date:"2018-08-20"},
+    {item:"Honey Sesame Chicken Breast",restaurant:"Panda Express",cost:"$8.00",rating:"9.8",date:"2018-08-16"},
+    {item:"$9 Five Meat Pizza",restaurant:"Little Caesars",cost:"$9.00",rating:"7.7",date:"2018-08-11"},
+    {item:"BeeBad Energy Drink",restaurant:"-",cost:"$2.00",rating:"8.82",date:"2018-08-09"},
+    {item:"Chicken Tenders",restaurant:"Wendy's",cost:"$3.78",rating:"8.2",date:"2018-08-02"},
+    {item:"Watermelon Freeze",restaurant:"Taco Bell",cost:"$2.39",rating:"7.0",date:"2018-07-27"},
+    {item:"Donut Fries",restaurant:"Dunkin' Donuts",cost:"$2.00",rating:"7.26",date:"2018-07-24"},
+    {item:"Cheesy Bites Pizza",restaurant:"Pizza Hut",cost:"$13.00",rating:"9.17",date:"2018-07-21"},
+    {item:"Crispy Chicken Tenders",restaurant:"Sonic",cost:"$5.79",rating:"5.0",date:"2018-07-18"},
+    {item:"Nacho Fries",restaurant:"Taco Bell",cost:"$1.49",rating:"9.5",date:"2018-07-14"},
+    {item:"Buffalo Ranch Crispy Chicken Sandwich",restaurant:"Wendy's",cost:"$1.00",rating:"6.8",date:"2018-07-11"},
+    {item:"Bacon Smokehouse Burger",restaurant:"McDonald's",cost:"$5.39",rating:"7",date:"2018-07-05"},
+    {item:"American Brewhouse King",restaurant:"Burger King",cost:"$6.00",rating:"5",date:"2018-07-02"},
+    {item:"Pickle Fried Chicken Sandwich",restaurant:"KFC",cost:"$4.80",rating:"6.0",date:"2018-06-26"},
+    {item:"Classic with Bacon Burger",restaurant:"IHOb",cost:"$9.00",rating:"8.5",date:"2018-06-16"},
+    {item:"Pickle Juice Slush",restaurant:"Sonic",cost:"$1.69",rating:"8.3",date:"2018-06-14"},
+    {item:"Pretzel Chicken Fries",restaurant:"Burger King",cost:"-",rating:"7",date:"2018-06-09"},
+    {item:"Chicken McGriddle",restaurant:"McDonald's",cost:"-",rating:"8.0",date:"2018-06-04"},
+    {item:"Rippin' Chicken",restaurant:"Popeyes",cost:"$5.00",rating:"7.5",date:"2018-06-01"},
+    {item:"Blueberry Glazed Doughnuts",restaurant:"Krispy Kreme",cost:"$5.00",rating:"6.2",date:"2018-05-23"},
+    {item:"Quarter Pounder with Cheese (Fresh Beef)",restaurant:"McDonald's",cost:"$4.00",rating:"8.7",date:"2018-05-19"},
+    {item:"Wild Naked Chicken Chalupa",restaurant:"Taco Bell",cost:"$2.99",rating:"8.0",date:"2018-05-14"},
+    {item:"Spirit of Aloha Dinner Show",restaurant:"Disney Polynesian Resort",cost:"$70.00",rating:"6",date:"2018-05-05"},
+    {item:"Stuffed Crust Pan Pizza",restaurant:"Pizza Hut",cost:"$15.00",rating:"8.0",date:"2018-05-01"},
+    {item:"Spicy Chicken Nuggets",restaurant:"Burger King",cost:"$1.69",rating:"8.2",date:"2018-04-22"},
+    {item:"Signature Garlic White Cheddar Burger",restaurant:"McDonald's",cost:"$4.59",rating:"2",date:"2018-04-13"},
+    {item:"Triple Melt Burrito",restaurant:"Taco Bell",cost:"$1.00",rating:"7.3",date:"2018-04-07"},
+    {item:"Crystal Ball Frappuccino",restaurant:"Starbucks",cost:"$5.45",rating:"9.0",date:"2018-03-25"},
+    {item:"Apple Strawberry Banana Puree",restaurant:"Gerber",cost:"$0.75",rating:"6.7",date:"2018-03-19"},
+    {item:"Extra Most Bestest Stuffed Crust Pizza",restaurant:"Little Caesars",cost:"$9.00",rating:"8.5",date:"2018-03-15"},
+    {item:"Spicy Crispy Chicken Sandwich",restaurant:"Burger King",cost:"$4.00",rating:"8.8",date:"2018-03-06"},
+    {item:"Szechuan Sauce",restaurant:"McDonald's",cost:"-",rating:"9.4",date:"2018-02-26"},
+    {item:"Cheesy Tots",restaurant:"Burger King",cost:"$2.00",rating:"1",date:"2018-02-22"},
+    {item:"Cherry Mocha",restaurant:"Starbucks",cost:"$4.95",rating:"8.5",date:"2018-02-14"},
+    {item:"Build Your Own Veggie Pizza",restaurant:"McDonald's",cost:"$9.00",rating:"9.3",date:"2018-02-06"},
+    {item:"Smoky Mountain BBQ Chicken Tenders",restaurant:"KFC",cost:"$5.00",rating:"6.8",date:"2018-01-29"},
+    {item:"Nacho Fries",restaurant:"Taco Bell",cost:"$1.00",rating:"9.5",date:"2018-01-25"},
+    {item:"Double Quarter Pound King",restaurant:"Burger King",cost:"$5.00",rating:"8.9",date:"2018-01-22"},
+    {item:"Strawberry Peach Fruit Fizz",restaurant:"Sonic",cost:"-",rating:"7.0",date:"2018-01-17"},
+    {item:"Mango Lime Fruit Fizz",restaurant:"Sonic",cost:"-",rating:"4.3",date:"2018-01-17"},
+    {item:"Raspberry Lemon Fruit Fizz",restaurant:"Sonic",cost:"-",rating:"8.5",date:"2018-01-17"},
+    {item:"Ghost Pepper Wings",restaurant:"Popeyes",cost:"$4.99",rating:"7.2",date:"2018-01-11"},
+    {item:"Bacon McDouble",restaurant:"McDonald's",cost:"$2.00",rating:"6.5",date:"2018-01-06"},
+    {item:"Classic Chicken Sandwich",restaurant:"McDonald's",cost:"$3.00",rating:"8.3",date:"2018-01-06"},
+    {item:"Stacker",restaurant:"Taco Bell",cost:"$1.00",rating:"8.8",date:"2018-01-02"},
+    {item:"Flamin' Hot Mac n' Cheetos",restaurant:"Burger King",cost:"$2.99",rating:"8.6",date:"2017-12-03"},
+    {item:"New York Style Pepperoni Pizza",restaurant:"Sbarro",cost:"$4.09",rating:"7.3",date:"2017-11-28"},
+    {item:"Ultimate Cheesy Crust Pizza",restaurant:"Pizza Hut",cost:"$12.00",rating:"9.3",date:"2017-11-27"},
+    {item:"Rolled Chicken Tacos (4pc)",restaurant:"Taco Bell",cost:"$4.00",rating:"7.3",date:"2017-11-20"},
+    {item:"Cheddar and Apple Butter Turkey Slider",restaurant:"White Castle",cost:"$1.00",rating:"9.0",date:"2017-11-15"},
+    {item:"Buffalo Chicken Pizza",restaurant:"Domino's",cost:"$13.00",rating:"7.7",date:"2017-11-11"},
+    {item:"Chicken Tenders (3pc)",restaurant:"Wendy's",cost:"$3.00",rating:"8.6",date:"2017-10-30"},
+    {item:"Zombie Frappuccino",restaurant:"Starbucks",cost:"$5.00",rating:"8.5",date:"2017-10-26"},
+    {item:"Mystery Flavor Oreo Cookies",restaurant:"Oreo",cost:"$4.00",rating:"8.4",date:"2017-10-22"},
+    {item:"Spicy Chicken Nuggets (10pc)",restaurant:"Burger King",cost:"$1.49",rating:"9.0",date:"2017-10-17"},
+    {item:"Crispy Chicken Quesadilla",restaurant:"Taco Bell",cost:"-",rating:"8.7",date:"2017-10-09"},
+    {item:"Buttermilk Crispy Tenders (4pc)",restaurant:"McDonald's",cost:"$4.00",rating:"9.2",date:"2017-10-07"},
+    {item:"1/4 LB Popcorn Chicken",restaurant:"Popeyes",cost:"$4.00",rating:"9.0",date:"2017-09-26"},
+    {item:"Chicken Biscuit",restaurant:"Hardee's",cost:"$1.30",rating:"9.7",date:"2017-09-24"},
+    {item:"Backyard BBQ Chicken Pizza",restaurant:"Pizza Hut",cost:"$12.00",rating:"8.95",date:"2017-09-03"},
+    {item:"Rodeo King Burger",restaurant:"Burger King",cost:"$6.00",rating:"8.5",date:"2017-08-27"},
+    {item:"Cheesy Tots",restaurant:"Burger King",cost:"$2.13",rating:"7.6",date:"2017-08-20"},
+    {item:"Hot Honey Crunch Tenders",restaurant:"Popeyes",cost:"$5.00",rating:"8.8",date:"2017-08-17"},
+    {item:"Hot Wings",restaurant:"Domino's",cost:"$6.00",rating:"9.2",date:"2017-08-14"},
+    {item:"Garlic Parmesan Dunked Chicken Sandwich",restaurant:"Sonic",cost:"$6.49",rating:"5.0",date:"2017-08-09"},
+    {item:"Buffalo Chicken Tender Sub",restaurant:"Publix",cost:"$6.00",rating:"9.6",date:"2017-08-07"},
+    {item:"Beefy Potato-Rito",restaurant:"Taco Bell",cost:"$1.00",rating:"8.6",date:"2017-07-31"},
+    {item:"Signature Sriracha Quarter Pound Burger",restaurant:"McDonald's",cost:"$5.13",rating:"4.2",date:"2017-07-27"},
+    {item:"Buffalo Chicken Tenders",restaurant:"Culver's",cost:"$10.64",rating:"9.38",date:"2017-07-25"},
+    {item:"Papa's Chicken Poppers",restaurant:"Papa John's",cost:"$6.00",rating:"8.1",date:"2017-07-20"},
+    {item:"Original Pretzel Dog",restaurant:"Sonic",cost:"$2.45",rating:"8.0",date:"2017-07-16"},
+    {item:"Bacon Queso Cheeseburger",restaurant:"Wendy's",cost:"$5.87",rating:"8.4",date:"2017-07-14"},
+    {item:"Triple Thick Brown Sugar Bacon BLT",restaurant:"Arby's",cost:"$5.80",rating:"5.0",date:"2017-07-10"},
+    {item:"Parmesan Bread Twists",restaurant:"Domino's",cost:"$5.99",rating:"7.0",date:"2017-07-06"},
+    {item:"Cheddar Biscuit Butterfly Shrimp",restaurant:"Popeyes",cost:"$5.00",rating:"4.8",date:"2017-07-05"},
+    {item:"BBQ Bacon Crispy Chicken Sandwich",restaurant:"Burger King",cost:"$5.63",rating:"0.5",date:"2017-07-02"},
+    {item:"Lucky Charms Shake",restaurant:"Burger King",cost:"$3.31",rating:"6.0",date:"2017-06-28"},
+    {item:"Bacon Cheddarburger Pizza",restaurant:"Papa John's",cost:"$10.00",rating:"7.0",date:"2017-06-25"},
+    {item:"Double Chalupa",restaurant:"Taco Bell",cost:"$3.79",rating:"8.5",date:"2017-06-22"},
+    {item:"Mushroom & Swiss King Burger",restaurant:"Burger King",cost:"$6.59",rating:"3.0",date:"2017-06-21"},
+    {item:"Bacon Deluxe Burger",restaurant:"Culver's",cost:"$5.35",rating:"9.4",date:"2017-06-18"},
+    {item:"Sweet & Crunchy Chicken Tenders",restaurant:"Popeyes",cost:"$5.35",rating:"5.1",date:"2017-06-15"},
+    {item:"Sweet & Crunchy Chicken Tenders with Smokin' Pepper Jam Sauce",restaurant:"Popeyes",cost:"$5.35",rating:"7.5",date:"2017-06-15"},
+    {item:"Breakfast Quesadilla",restaurant:"Taco Bell",cost:"$2.34",rating:"9.7",date:"2017-06-08"},
+    {item:"Breakfast Salsa",restaurant:"Taco Bell",cost:"-",rating:"9.75",date:"2017-06-08"},
+    {item:"Cheesy Bites Pizza",restaurant:"Pizza Hut",cost:"$12.00",rating:"8.9",date:"2017-06-04"},
+    {item:"ExtraMostBestest Pizza",restaurant:"Little Caesars",cost:"$6.00",rating:"9.2",date:"2017-06-01"},
+    {item:"Maple Bacon Dijon Signature Crafted Chicken Sandwich",restaurant:"McDonald's",cost:"$5.13",rating:"1.0",date:"2017-05-31"},
+    {item:"Smokehouse BBQ Bacon Sandwich",restaurant:"Chick-fil-A",cost:"$6.00",rating:"9.7",date:"2017-05-27"},
+    {item:"Bacon n' Cheese Triple Xtreme Steakburger",restaurant:"Steak 'n Shake",cost:"$6.00",rating:"9.6",date:"2017-05-21"},
+    {item:"Mac n' Cheetos",restaurant:"Burger King",cost:"$2.00",rating:"8.0",date:"2017-05-18"},
+    {item:"MunchPak Family Pack",restaurant:"MunchPak",cost:"$40.00",rating:"9.0",date:"2017-05-15"},
+    {item:"Naked Chicken Chips",restaurant:"Taco Bell",cost:"$2.45",rating:"8.0",date:"2017-05-12"},
+    {item:"Deluxe Chicken Sandwich",restaurant:"Chick-fil-A",cost:"$2.85",rating:"7.2",date:"2017-05-06"},
+    {item:"Smokehouse Pork Belly Sandwich",restaurant:"Arby's",cost:"$6.00",rating:"6.5",date:"2017-05-03"},
+    {item:"Signature Crafted Sweet BBQ Bacon Burger",restaurant:"McDonald's",cost:"$4.79",rating:"6.5",date:"2017-04-30"},
+    {item:"Baby Back Rib Burger",restaurant:"Hardee's",cost:"$5.98",rating:"7.6",date:"2017-04-28"},
+    {item:"Froot Loops Shake",restaurant:"Burger King",cost:"$3.09",rating:"9.77",date:"2017-04-25"},
+    {item:"Zinger Sandwich",restaurant:"KFC",cost:"$4.00",rating:"8.1",date:"2017-04-22"},
+    {item:"Steakhouse King",restaurant:"Burger King",cost:"$5.99",rating:"7.0",date:"2017-04-18"},
+    {item:"Fresh Mozzarella Chicken Sandwich",restaurant:"Wendy's",cost:"$5.66",rating:"5.6",date:"2017-04-16"},
+    {item:"Joker Mad Energy Drink",restaurant:"Joker",cost:"$2.00",rating:"8.8",date:"2017-04-14"},
+    {item:"Hot-N-Ready Classic Pepperoni Pizza",restaurant:"Little Caesars",cost:"$5.00",rating:"8.7",date:"2017-04-12"},
+    {item:"Loaded Taco Burrito",restaurant:"Taco Bell",cost:"$1.49",rating:"7.6",date:"2017-04-08"},
+    {item:"Honey BBQ Bacon Lil' Chickie",restaurant:"Sonic",cost:"$1.49",rating:"7.3",date:"2017-04-04"},
+    {item:"Double Pepperoni Pizza",restaurant:"Papa John's",cost:"$9.00",rating:"9.3",date:"2017-04-02"},
+    {item:"Original Hot Wings",restaurant:"Wingstop",cost:"$8.99",rating:"8.6",date:"2017-03-29"},
+    {item:"Cheesy Bacon Lil' Doggie",restaurant:"Sonic",cost:"$1.49",rating:"7.0",date:"2017-03-26"},
+    {item:"Del Taco Soft Taco",restaurant:"Del Taco",cost:"$1.40",rating:"7.1",date:"2017-03-23"},
+    {item:"Five Flavor Shrimp",restaurant:"Panda Express",cost:"$5.00",rating:"8.6",date:"2017-03-20"},
+    {item:"St. Patrick's Day Green Original Glazed Doughnut",restaurant:"Krispy Kreme",cost:"$1.09",rating:"9.0",date:"2017-03-17"},
+    {item:"Howie Bread",restaurant:"Hungry Howie's",cost:"$3.75",rating:"8.5",date:"2017-03-16"},
+    {item:"Premium Cod Fillet Fish Sandwich",restaurant:"Wendy's",cost:"$3.99",rating:"7.0",date:"2017-03-13"},
+    {item:"Meat Mountain Sandwich",restaurant:"Arby's",cost:"$10.70",rating:"8.5",date:"2017-03-10"},
+    {item:"Crispy Chicken Sandwich",restaurant:"Burger King",cost:"$4.39",rating:"5.5",date:"2017-03-07"},
+    {item:"Triple Double Crunchwrap",restaurant:"Taco Bell",cost:"$5.00",rating:"9.0",date:"2017-03-04"},
+    {item:"Smokehouse Pizza",restaurant:"Little Caesars",cost:"$9.00",rating:"9.2",date:"2017-03-02"},
+    {item:"Pancake on a Stick",restaurant:"Sonic",cost:"$2.13",rating:"7.6",date:"2017-02-28"},
+    {item:"Hand-Breaded Spicy Chicken Tenders",restaurant:"Hardee's",cost:"$4.38",rating:"8.3",date:"2017-02-24"},
+    {item:"Chicken Biscuit",restaurant:"Chick-fil-A",cost:"$2.80",rating:"9.0",date:"2017-02-22"},
+    {item:"Boneless Buffalo Wings",restaurant:"Sonic",cost:"$4.69",rating:"8.8",date:"2017-02-19"},
+    {item:"Chicken Tenders Sub",restaurant:"Publix",cost:"$8.00",rating:"9.5",date:"2017-02-16"},
+    {item:"Heart-Shaped Pizza",restaurant:"Pizza Hut",cost:"$10.00",rating:"7.1",date:"2017-02-13"},
+    {item:"Shamrock Shake",restaurant:"McDonald's",cost:"$2.00",rating:"1.7",date:"2017-02-12"},
+    {item:"Jalapeño Chicken Fries",restaurant:"Burger King",cost:"$2.00",rating:"8.5",date:"2017-02-09"},
+    {item:"Bacon Ranch Fries",restaurant:"Wendy's",cost:"$2.00",rating:"8.26",date:"2017-02-06"},
+    {item:"Ultimate Meats Pizza",restaurant:"Papa John's",cost:"$11.77",rating:"8.7",date:"2017-02-03"},
+    {item:"Georgia Gold Chicken",restaurant:"KFC",cost:"$5.25",rating:"7.5",date:"2017-01-31"},
+    {item:"McChicken Biscuit",restaurant:"McDonald's",cost:"$1.49",rating:"6.1",date:"2017-01-27"},
+    {item:"Naked Chicken Chalupa",restaurant:"Taco Bell",cost:"$3.60",rating:"7.49",date:"2017-01-27"},
+    {item:"Jalapeño McChicken Sandwich",restaurant:"McDonald's",cost:"$1.79",rating:"6.6",date:"2017-01-22"},
+    {item:"BBQ Bacon King",restaurant:"Burger King",cost:"$6.00",rating:"2.6",date:"2017-01-19"},
+    {item:"Roadhouse Baconzilla",restaurant:"Checkers",cost:"$5.00",rating:"7.3",date:"2017-01-17"},
+    {item:"McCafé Coffee",restaurant:"McDonald's",cost:"$1.00",rating:"8.6",date:"2017-01-15"},
+    {item:"BK Joe Coffee",restaurant:"Burger King",cost:"$1.00",rating:"7.6",date:"2017-01-15"},
+    {item:"Firecracker Chicken Breast",restaurant:"Panda Express",cost:"$6.00",rating:"7.9",date:"2017-01-12"},
+    {item:"Loaded Cinnamon Crazy Bites",restaurant:"Little Caesars",cost:"$5.00",rating:"8.8",date:"2017-01-09"},
+    {item:"Nacho Crunch Double Stacked Taco",restaurant:"Taco Bell",cost:"$1.00",rating:"7.0",date:"2017-01-06"},
+    {item:"Chicken McGriddle",restaurant:"McDonald's",cost:"$1.49",rating:"6.7",date:"2017-01-04"},
+    {item:"Spicy Sweet Double Stacked Taco",restaurant:"Taco Bell",cost:"$1.00",rating:"7.5",date:"2017-01-03"},
   ];
 
   function parseRating(r) {
@@ -420,6 +831,215 @@
     if (sortCol !== col) return '';
     return sortAsc ? ' ▲' : ' ▼';
   }
+
+  const RENAME = {
+    "Sonic Drive-In": "Sonic",
+    "Wing Stop": "Wingstop",
+    "Dunkin'": "Dunkin' Donuts"
+  };
+  const plotData = ratings
+    .map(r => {
+      const rating = parseFloat(r.rating);
+      const date = new Date(r.date);
+      const restaurant = RENAME[r.restaurant] ?? r.restaurant;
+      return {
+        ...r, restaurant, rating, date,
+        year: date.getFullYear(),
+        price: parseCost(r.cost)
+      };
+    })
+    .filter(r => !isNaN(r.rating) && r.rating >= 0 && r.rating <= 10);
+
+  const priceData = plotData.filter(d => d.price > 0 && d.price <= 30);
+
+  const overallMean = plotData.reduce((s, d) => s + d.rating, 0) / plotData.length;
+
+  const sortedByDate = [...plotData].sort((a, b) => a.date - b.date);
+  const rollWindow = 15;
+  const rolling = sortedByDate.map((d, i) => {
+    const slice = sortedByDate.slice(Math.max(0, i - rollWindow + 1), i + 1);
+    return { date: d.date, avg: slice.reduce((s, x) => s + x.rating, 0) / slice.length };
+  });
+
+  const counts = new Map();
+  for (const d of plotData) counts.set(d.restaurant, (counts.get(d.restaurant) ?? 0) + 1);
+  const topChains = [...counts.entries()]
+    .filter(([, n]) => n >= 15)
+    .sort((a, b) => b[1] - a[1])
+    .map(([r]) => r);
+  const facetData = plotData.filter(d => topChains.includes(d.restaurant));
+
+  const yearStats = [...new Set(plotData.map(d => d.year))].sort().map(y => {
+    const vs = plotData.filter(d => d.year === y).map(d => d.rating).sort((a, b) => a - b);
+    const n = vs.length;
+    const mean = vs.reduce((s, x) => s + x, 0) / n;
+    const median = n % 2 ? vs[(n - 1) / 2] : (vs[n / 2 - 1] + vs[n / 2]) / 2;
+    const sd = Math.sqrt(vs.reduce((s, x) => s + (x - mean) ** 2, 0) / (n - 1));
+    return { year: y, n, mean, median, sd };
+  });
+
+  // Per-chain × year mean rating (for the yearly-trajectory small multiples)
+  const chainYear = [];
+  for (const rest of topChains) {
+    const rs = plotData.filter(d => d.restaurant === rest);
+    for (const y of [...new Set(rs.map(d => d.year))].sort()) {
+      const vs = rs.filter(d => d.year === y);
+      chainYear.push({
+        restaurant: rest, year: y, n: vs.length,
+        mean: vs.reduce((s, x) => s + x.rating, 0) / vs.length
+      });
+    }
+  }
+  // Early (2017–2021) vs recent (2022–2026) mean per chain — "who soured the most"
+  const EARLY = 'Early (2017–2021)';
+  const RECENT = 'Recent (2022–2026)';
+  const chainEarlyLate = topChains.map(rest => {
+    const rs = plotData.filter(d => d.restaurant === rest);
+    const m = a => a.length ? a.reduce((s, x) => s + x.rating, 0) / a.length : null;
+    const e = rs.filter(d => d.year <= 2021);
+    const l = rs.filter(d => d.year >= 2022);
+    return {
+      restaurant: rest,
+      earlyMean: m(e), recentMean: m(l),
+      earlyN: e.length, recentN: l.length
+    };
+  }).filter(d => d.earlyMean != null && d.recentMean != null);
+  const souredOrder = [...chainEarlyLate]
+    .sort((a, b) => (b.earlyMean - b.recentMean) - (a.earlyMean - a.recentMean))
+    .map(d => d.restaurant);
+  const declineOrder = souredOrder;
+  const chainEarlyLateLong = chainEarlyLate.flatMap(d => [
+    { restaurant: d.restaurant, period: EARLY, mean: d.earlyMean, n: d.earlyN },
+    { restaurant: d.restaurant, period: RECENT, mean: d.recentMean, n: d.recentN }
+  ]);
+  const periodColor = { domain: [EARLY, RECENT], range: ['#3b4cc0', '#b40426'] };
+
+  const yearColor = { type: 'linear', scheme: 'turbo', label: 'Review year', tickFormat: 'd' };
+
+  onMount(async () => {
+    const Plot = await import('@observablehq/plot');
+
+    const ptTitle = d =>
+      `${d.item}\n${d.restaurant} · ${d.date.toISOString().slice(0, 10)}\nRating: ${d.rating}`;
+
+    // Viz 1 — Ratings over time, dots colored by year
+    timelineEl.replaceChildren(Plot.plot({
+      width: 820, height: 360,
+      marginLeft: 44, marginBottom: 36, marginTop: 24, marginRight: 16,
+      color: { ...yearColor, legend: true },
+      x: { label: null, type: 'time' },
+      y: { domain: [0, 10], label: 'Rating ↑', grid: true },
+      marks: [
+        Plot.dot(plotData, { x: 'date', y: 'rating', fill: 'year', r: 2.6, fillOpacity: 0.55, stroke: 'none' }),
+        Plot.line(rolling, { x: 'date', y: 'avg', stroke: '#222', strokeWidth: 2 }),
+        Plot.ruleY([overallMean], { stroke: '#888', strokeDasharray: '4 4' }),
+        Plot.tip(plotData, Plot.pointer({ x: 'date', y: 'rating', title: ptTitle }))
+      ]
+    }));
+
+    // Viz 2 — Clean per-year distribution (canonical Plot.boxY only)
+    yearEl.replaceChildren(Plot.plot({
+      width: 820, height: 360,
+      marginLeft: 44, marginBottom: 36, marginTop: 16, marginRight: 16,
+      color: yearColor,
+      x: { label: 'Year', tickFormat: 'd', interval: 1, inset: 24 },
+      y: { domain: [0, 10], label: 'Rating ↑', grid: true },
+      marks: [
+        Plot.boxY(plotData, { x: 'year', y: 'rating', fill: 'year' }),
+        Plot.tip(yearStats, Plot.pointerX({
+          x: 'year', y: 'mean',
+          title: d => `${d.year}  (n=${d.n})\nmean ${d.mean.toFixed(2)} · median ${d.median.toFixed(1)}\nSD ${d.sd.toFixed(2)}`
+        }))
+      ]
+    }));
+
+    // Viz 3 — Spread by year (standard deviation), the polarization thesis in one line
+    spreadEl.replaceChildren(Plot.plot({
+      width: 820, height: 320,
+      marginLeft: 44, marginBottom: 36, marginTop: 16, marginRight: 16,
+      color: { ...yearColor, legend: true },
+      x: { label: 'Year', tickFormat: 'd', interval: 1 },
+      y: { domain: [0, 3.5], label: 'Std. dev. of rating ↑', grid: true },
+      marks: [
+        Plot.line(yearStats, { x: 'year', y: 'sd', stroke: '#bbb', strokeWidth: 1.5 }),
+        Plot.dot(yearStats, { x: 'year', y: 'sd', fill: 'year', r: 5, stroke: 'white', strokeWidth: 0.6 }),
+        Plot.tip(yearStats, Plot.pointerX({
+          x: 'year', y: 'sd',
+          title: d => `${d.year}  (n=${d.n})\nSD ${d.sd.toFixed(2)}\nmean ${d.mean.toFixed(2)}`
+        }))
+      ]
+    }));
+
+    // Viz 6 — Price over time (fast-food inflation), dots colored by year
+    priceEl.replaceChildren(Plot.plot({
+      width: 820, height: 360,
+      marginLeft: 44, marginBottom: 40, marginTop: 24, marginRight: 16,
+      color: { ...yearColor, legend: true },
+      x: { label: null, type: 'time' },
+      y: { label: 'Price (USD) ↑', grid: true, nice: true },
+      marks: [
+        Plot.dot(priceData, { x: 'date', y: 'price', fill: 'year', r: 2.6, fillOpacity: 0.55, stroke: 'none' }),
+        Plot.linearRegressionY(priceData, { x: 'date', y: 'price', stroke: '#222', strokeWidth: 1.5, ci: 0.95 }),
+        Plot.tip(priceData, Plot.pointer({
+          x: 'date', y: 'price',
+          title: d => `${d.item}\n${d.restaurant} · ${d.date.toISOString().slice(0, 10)}\n$${d.price.toFixed(2)}`
+        }))
+      ]
+    }));
+
+    // Viz 4 — Small-multiples scatter by chain, dots colored by year
+    chainsEl.replaceChildren(Plot.plot({
+      width: 820, height: topChains.length * 92 + 70,
+      marginLeft: 40, marginBottom: 36, marginTop: 16, marginRight: 124,
+      color: yearColor,
+      fy: { label: null, domain: topChains },
+      x: { type: 'time', label: null },
+      y: { domain: [0, 10], label: null, ticks: 5, grid: true },
+      marks: [
+        Plot.frame({ stroke: '#e0e0e0' }),
+        Plot.dot(facetData, { fy: 'restaurant', x: 'date', y: 'rating', fill: 'year', r: 2.2, fillOpacity: 0.6, stroke: 'none' }),
+        Plot.linearRegressionY(facetData, { fy: 'restaurant', x: 'date', y: 'rating', stroke: '#222', strokeWidth: 1.5, ci: 0 }),
+        Plot.tip(facetData, Plot.pointer({ fy: 'restaurant', x: 'date', y: 'rating', title: ptTitle }))
+      ]
+    }));
+
+    // Viz 5 — Per-chain yearly mean trajectory (small multiples), biggest decline first
+    eraEl.replaceChildren(Plot.plot({
+      width: 820, height: declineOrder.length * 92 + 70,
+      marginLeft: 40, marginBottom: 36, marginTop: 16, marginRight: 124,
+      color: { ...yearColor, legend: true },
+      fy: { label: null, domain: declineOrder },
+      x: { label: null, tickFormat: 'd', interval: 1 },
+      y: { domain: [0, 10], label: null, ticks: 5, grid: true },
+      marks: [
+        Plot.frame({ stroke: '#e0e0e0' }),
+        Plot.line(chainYear, { fy: 'restaurant', x: 'year', y: 'mean', stroke: '#bbb', strokeWidth: 1.5 }),
+        Plot.dot(chainYear, { fy: 'restaurant', x: 'year', y: 'mean', fill: 'year', r: 3.6, stroke: 'white', strokeWidth: 0.6 }),
+        Plot.tip(chainYear, Plot.pointer({
+          fy: 'restaurant', x: 'year', y: 'mean',
+          title: d => `${d.restaurant}\n${d.year}: mean ${d.mean.toFixed(2)} (n=${d.n})`
+        }))
+      ]
+    }));
+
+    // Viz 7 — Who soured the most: early vs recent dumbbell
+    souredEl.replaceChildren(Plot.plot({
+      width: 820, height: souredOrder.length * 34 + 80,
+      marginLeft: 110, marginRight: 24, marginTop: 24, marginBottom: 40,
+      color: { ...periodColor, legend: true },
+      x: { domain: [0, 10], label: 'Mean rating →', grid: true },
+      y: { domain: souredOrder, label: null },
+      marks: [
+        Plot.ruleX([overallMean], { stroke: '#888', strokeDasharray: '4 4' }),
+        Plot.link(chainEarlyLate, { y: 'restaurant', x1: 'earlyMean', x2: 'recentMean', stroke: '#ccc', strokeWidth: 2.5 }),
+        Plot.dot(chainEarlyLateLong, { y: 'restaurant', x: 'mean', fill: 'period', r: 5.5, stroke: 'white', strokeWidth: 1 }),
+        Plot.tip(chainEarlyLateLong, Plot.pointer({
+          y: 'restaurant', x: 'mean',
+          title: d => `${d.restaurant}\n${d.period}\nmean ${d.mean.toFixed(2)} (n=${d.n})`
+        }))
+      ]
+    }));
+  });
 </script>
 
 <style>
@@ -429,6 +1049,10 @@
   .sortable-table th:hover { background: #e8e8e8; }
   .sortable-table tr:nth-child(even) { background: #fafafa; }
   .rating-count { margin-bottom: 1em; font-style: italic; color: #666; }
+  .plot-container { margin: 1em 0 0.25em; overflow-x: auto; }
+  .plot-container :global(svg) { display: block; max-width: 100%; height: auto; }
+  .plot-container :global(figure) { margin: 0; }
+  .plot-caption { font-size: 0.85em; color: #666; margin: 0 0 1.5em; font-style: italic; }
 </style>
 
 # Getting Every ReviewBrah Rating Using LLMs
@@ -437,11 +1061,53 @@
 
 A phrase that echoes throughout my house on weekly basis from my favorite YouTuber, ReviewBrah.
 
-<p class="rating-count">{ratings.length} ratings tracked | Last updated: February 2026</p>
+<p class="rating-count">{ratings.length} ratings tracked | Last updated: May 2026</p>
 
-## 2025 Year in Review
+## A Decade of Ratings
 
-Chick-fil-A dominated with the year's highest score, a **9.9** for the Pretzel Cheddar Club Sandwich, while Burger King hit rock bottom with the SpongeBob Crabby Whopper at **0.2**. The McRib returned to a 9.2, Taco Bell's Birthday Cake Churros surprised at 9.1, and Chili's Big QP Burger made the case that sit-down restaurants are now the better value play. On the other end, Chick-fil-A's reformulated fries earned a devastating 1.0, Domino's Hot Buffalo Loaded Chicken got compared to dog food, and every Mike's Hot Honey collaboration was terrible. Recurring themes: rising prices, missing ingredients, and an industry chasing brand deals over quality.
+Across {plotData.length} ratings spanning 2017–2026, the scores drift down and spread out year over year — ReviewBrah's early reviews clustered high and tight, while recent years swing between glowing and scathing as the industry leaned into stunt menus and brand collabs. Every chart below is colored along a single 2017→2026 ramp so the year is readable everywhere.
+
+## Ratings Over Time
+
+<div class="plot-container" bind:this={timelineEl}></div>
+
+<p class="plot-caption">Every review as a dot, colored by year; black line is the 15-review rolling average, dashed line the all-time mean ({overallMean.toFixed(2)}). Hover any point for the item, chain, date and score.</p>
+
+## Distribution by Year
+
+<div class="plot-container" bind:this={yearEl}></div>
+
+<p class="plot-caption">Canonical box plot per year: box = interquartile range, line = median, whiskers = 1.5×IQR, dots = outliers. Boxes stay short and high through 2021, then stretch year after year. Hover a year for n, mean, median and SD.</p>
+
+## Spread by Year
+
+<div class="plot-container" bind:this={spreadEl}></div>
+
+<p class="plot-caption">The whole thesis in one line: standard deviation of every year's ratings — how far a typical review swings from that year's average. It roughly doubles from ~1.4 in the early years to ~3 by 2025–26. Hover a year for the exact SD, mean and n.</p>
+
+## By Chain
+
+<div class="plot-container" bind:this={chainsEl}></div>
+
+<p class="plot-caption">One panel per chain with ≥15 reviews ({topChains.length} chains, ordered by review count). Dots are individual reviews colored by year; each black line is a least-squares trend. Hover any point for details — watch which chains slid hardest.</p>
+
+## Yearly Average by Chain
+
+<div class="plot-container" bind:this={eraEl}></div>
+
+<p class="plot-caption">Each chain's mean rating per year, connected into a trajectory; dots colored by year. Same {topChains.length} chains, ordered with the steepest early→late decline at top. Hover a dot for the exact yearly mean and sample size.</p>
+
+## Who Soured the Most
+
+<div class="plot-container" bind:this={souredEl}></div>
+
+<p class="plot-caption">The trajectory above shows the shape; this is the verdict. Each chain's mean rating early (2017–2021, blue) vs recent (2022–2026, red); the bar is the swing. Sorted by biggest drop at top. Dashed line is the all-time mean ({overallMean.toFixed(2)}). Hover a dot for the exact mean and sample size.</p>
+
+## Price Over Time
+
+<div class="plot-container" bind:this={priceEl}></div>
+
+<p class="plot-caption">Every priced review ({priceData.length} with a parseable dollar amount, ≤ $30) plotted by date, colored by year. The black line is a least-squares fit with a 95% confidence band — the upward slope is fast-food inflation in one picture. Hover any point for the item, chain, date and price.</p>
 
 <table class="sortable-table">
   <thead>

@@ -11,6 +11,7 @@
 		{
 			title: 'Tutorials',
 			items: [
+				{ text: 'Datamonkey MCP on Cowork', link: '/tutorials/datamonkey-mcp' },
 				{ text: 'Review Brah Ratings', link: '/tutorials/reviewbrah' },
 				{ text: 'Kraken on Galaxy', link: '/tutorials/kraken' }
 			]
