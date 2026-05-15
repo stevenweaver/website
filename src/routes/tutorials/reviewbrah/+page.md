@@ -218,7 +218,7 @@
     {item:"MC Rib",restaurant:"McDonald's",cost:"$6.50",rating:"7.0",date:"2023-11-19"},
     {item:"Good Burger 2 Meal",restaurant:"Arby's",cost:"$13.50",rating:"7.2",date:"2023-11-14"},
     {item:"Breakfast Taco Sausage",restaurant:"Taco Bell",cost:"$2.00",rating:"7.9",date:"2023-11-09"},
-    {item:"Burger with bacon",restaurant:"Culver's",cost:"N/A",rating:"1/5",date:"2023-11-04"},
+    {item:"Burger with bacon",restaurant:"Culver's",cost:"-",rating:"2.0",date:"2023-11-04"},
     {item:"Fried Mac and Cheese Bites",restaurant:"Arby's",cost:"$4.50 - $5.00",rating:"4",date:"2023-11-02"},
     {item:"Roasted Garlic Cheese Sticks",restaurant:"Pizza Hut",cost:"$14.00",rating:"7.7",date:"2023-10-27"},
     {item:"Spicy Truff Chicken Sandwich",restaurant:"Popeyes",cost:"$8.00",rating:"4",date:"2023-10-24"},
@@ -1061,7 +1061,7 @@
 
 A phrase that echoes throughout my house on weekly basis from my favorite YouTuber, ReviewBrah.
 
-<p class="rating-count">{ratings.length} ratings tracked | Last updated: May 2026</p>
+<p class="rating-count">{plotData.length} ratings analyzed | Last updated: May 2026</p>
 
 ## A Decade of Ratings
 
