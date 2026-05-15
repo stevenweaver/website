@@ -32,6 +32,7 @@
 
 	.page-content {
 		flex: 1;
+		min-width: 0;
 		margin-left: 20rem;
 		padding: 2rem;
 		max-width: 900px;
@@ -40,6 +41,7 @@
 	@media (max-width: 768px) {
 		.page-content {
 			margin-left: 0;
+			padding: 1rem;
 		}
 	}
 </style>

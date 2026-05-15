@@ -911,15 +911,28 @@
 
   const yearColor = { type: 'linear', scheme: 'turbo', label: 'Review year', tickFormat: 'd' };
 
-  onMount(async () => {
+  onMount(() => {
+    let ro, resizeT, disposed = false;
+    (async () => {
     const Plot = await import('@observablehq/plot');
+    if (disposed) return;
 
     const ptTitle = d =>
       `${d.item}\n${d.restaurant} · ${d.date.toISOString().slice(0, 10)}\nRating: ${d.rating}`;
 
+    let lastW = 0;
+    const renderAll = () => {
+      const avail = timelineEl?.clientWidth || 820;
+      const W = Math.max(280, Math.min(820, avail));
+      if (W === lastW) return;
+      lastW = W;
+      // Label-heavy charts (facets / dumbbell) keep a legibility floor and
+      // scroll inside their container on very narrow screens.
+      const Wf = Math.max(W, 560);
+
     // Viz 1 — Ratings over time, dots colored by year
     timelineEl.replaceChildren(Plot.plot({
-      width: 820, height: 360,
+      width: W, height: 360,
       marginLeft: 44, marginBottom: 36, marginTop: 24, marginRight: 16,
       color: { ...yearColor, legend: true },
       x: { label: null, type: 'time' },
@@ -934,7 +947,7 @@
 
     // Viz 2 — Clean per-year distribution (canonical Plot.boxY only)
     yearEl.replaceChildren(Plot.plot({
-      width: 820, height: 360,
+      width: W, height: 360,
       marginLeft: 44, marginBottom: 36, marginTop: 16, marginRight: 16,
       color: yearColor,
       x: { label: 'Year', tickFormat: 'd', interval: 1, inset: 24 },
@@ -950,7 +963,7 @@
 
     // Viz 3 — Spread by year (standard deviation), the polarization thesis in one line
     spreadEl.replaceChildren(Plot.plot({
-      width: 820, height: 320,
+      width: W, height: 320,
       marginLeft: 44, marginBottom: 36, marginTop: 16, marginRight: 16,
       color: { ...yearColor, legend: true },
       x: { label: 'Year', tickFormat: 'd', interval: 1 },
@@ -968,7 +981,7 @@
 
     // Viz 6 — Price over time (fast-food inflation), dots colored by year
     priceEl.replaceChildren(Plot.plot({
-      width: 820, height: 360,
+      width: W, height: 360,
       marginLeft: 44, marginBottom: 40, marginTop: 24, marginRight: 16,
       color: { ...yearColor, legend: true },
       x: { label: null, type: 'time' },
@@ -985,7 +998,7 @@
 
     // Viz 4 — Small-multiples scatter by chain, dots colored by year
     chainsEl.replaceChildren(Plot.plot({
-      width: 820, height: topChains.length * 92 + 70,
+      width: Wf, height: topChains.length * 92 + 70,
       marginLeft: 40, marginBottom: 36, marginTop: 16, marginRight: 124,
       color: yearColor,
       fy: { label: null, domain: topChains },
@@ -1001,7 +1014,7 @@
 
     // Viz 5 — Per-chain yearly mean trajectory (small multiples), biggest decline first
     eraEl.replaceChildren(Plot.plot({
-      width: 820, height: declineOrder.length * 92 + 70,
+      width: Wf, height: declineOrder.length * 92 + 70,
       marginLeft: 40, marginBottom: 36, marginTop: 16, marginRight: 124,
       color: { ...yearColor, legend: true },
       fy: { label: null, domain: declineOrder },
@@ -1020,7 +1033,7 @@
 
     // Viz 7 — Who soured the most: early vs recent dumbbell
     souredEl.replaceChildren(Plot.plot({
-      width: 820, height: souredOrder.length * 34 + 80,
+      width: Wf, height: souredOrder.length * 34 + 80,
       marginLeft: 110, marginRight: 24, marginTop: 24, marginBottom: 40,
       color: { ...periodColor, legend: true },
       r: { range: [3, 9] },
@@ -1037,6 +1050,17 @@
         }))
       ]
     }));
+    };
+
+    renderAll();
+    ro = new ResizeObserver(() => {
+      clearTimeout(resizeT);
+      resizeT = setTimeout(renderAll, 150);
+    });
+    ro.observe(timelineEl);
+    })();
+
+    return () => { disposed = true; ro?.disconnect(); clearTimeout(resizeT); };
   });
 </script>
 
@@ -1047,8 +1071,8 @@
   .sortable-table th:hover { background: #e8e8e8; }
   .sortable-table tr:nth-child(even) { background: #fafafa; }
   .rating-count { margin-bottom: 1em; font-style: italic; color: #666; }
-  .plot-container { margin: 1em 0 0.25em; overflow-x: auto; }
-  .plot-container :global(svg) { display: block; max-width: 100%; height: auto; }
+  .plot-container { margin: 1em 0 0.25em; overflow-x: auto; max-width: 100%; }
+  .plot-container :global(svg) { display: block; height: auto; }
   .plot-container :global(figure) { margin: 0; }
   .plot-caption { font-size: 0.85em; color: #666; margin: 0 0 1.5em; font-style: italic; }
 </style>
