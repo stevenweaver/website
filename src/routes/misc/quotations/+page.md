@@ -23,7 +23,7 @@
 
 ### Bruno Munari
 
-![spoon](./wear-and-tear.png)
+![spoon](/misc/wear-and-tear.png)
 
 > We have (though not all at once, of course) eaten the missing part mixed up in
 > our soup. It is continual use that has given the spoon its new shape. This is

@@ -1,5 +1,5 @@
 # Bubblegum Crisis Goofs
 
-![spoon](./password.png)
-![spoon](./galbeston.png)
-![spoon](./43rd.png)
+![spoon](/av/password.png)
+![spoon](/av/galbeston.png)
+![spoon](/av/43rd.png)
