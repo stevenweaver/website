@@ -1109,12 +1109,30 @@ close to real time.
 
 ## A Decade of Ratings
 
-Across {plotData.length} reviews from 2017 to 2026 the pattern is consistent
-and, once you see it, hard to unsee: the average score slips only about a
-point, but the spread roughly _doubles_. Early ReviewBrah almost never went
-below a 4; recent ReviewBrah hands out 0.2s and 9.9s in the same month. It
-isn't deflation — it's polarization. Every chart below is colored along a
-single 2017→2026 ramp so the year reads at a glance.
+The numbers do not lie, and they do not flatter. Across {plotData.length}
+reviews the yearly average has slid from 7.7 in 2017 to the low 6s today, a
+drop of more than a point. The more telling number is the spread, which has
+roughly doubled, from a standard deviation near 1.5 in the calm early years to
+over 3 by 2026. Fast food in 2017 was reliably mediocre-to-good. Fast food in
+2026 is either a 9 or a 0. There is no middle anymore.
+
+The items at the bottom share a theme. The SpongeBob Crabby Whopper (0.2),
+Taco Bell's Diablo Dusted Nuggets (0.3) and Avocado Ranch Crispy Chicken Taco
+(0.5), and McDonald's Bacon Hot Honey McCrispy (2) are less food than marketing
+artifact. The boring classics that skip the collab treatment, the Big Mac, the
+McRib, the standard Whopper, still pull 8s and 9s.
+
+Prices went the other way. Over the same decade the typical reviewed item
+climbed from under $5 to around $8, the better part of a doubling. Put the two
+trends together and the story is plain. People are paying more for food that a
+man who eats it for a living likes less and less.
+
+One honest caveat. This is one mouth, not an industry. ReviewBrah was 19 in
+2017 and is near 30 now, palates change, novelty fades, and a 0.2 makes for
+better content than a 6.5, so the incentives do not all point at the food. The
+data here is suggestive, not conclusive. What it can say is that the person
+best positioned to notice, the one who has actually eaten all of it, thinks it
+is getting worse, and his own scores agree.
 
 ## Ratings Over Time
 
