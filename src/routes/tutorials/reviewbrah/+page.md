@@ -1079,11 +1079,6 @@
 
 # Getting Every ReviewBrah Rating Using LLMs
 
-A decade of weekly fast-food reviews from a single, remarkably consistent
-palate is functioning, almost accidentally, as a longitudinal sentiment index
-for an industry that has stopped trying to feed people and started trying to go
-viral.
-
 This analysis started the same way his did. In a May 2026 video titled
 *"Are We Nearing the End?"*, ReviewBrah recounts a "casual thought" — "the last
 couple of items that I've reviewed were really bad, weren't they" — and decides
@@ -1096,8 +1091,16 @@ progress ruined it." He stresses this "isn't cherry-picked, this is the totality
 of just the latest reviews," then lands on the question that names this project:
 "years ago I was asking myself how bad can it get… here we are three years
 later, and even though you would think we've reached the bottom, I don't think
-we have yet." He ran that check on a handful of recent videos. We ran it on all
-{plotData.length}.
+we have yet." He ran that check on a handful of recent videos; we ran it on
+{plotData.length}, dating back to 2017.
+
+A decade of weekly fast-food reviews from a single, remarkably consistent
+palate is functioning, almost accidentally, as a longitudinal sentiment index
+for an industry that has stopped trying to feed people and started trying to go
+viral. That consistency is the whole instrument: because the same person has
+graded on the same scale, week after week, for ten years, the decline he feels
+in his gut is something we can actually measure — and keep measuring, in close
+to real time.
 
 <p class="rating-count">{plotData.length} ratings analyzed | Last updated: May 2026</p>
 
