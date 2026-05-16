@@ -1109,30 +1109,39 @@ close to real time.
 
 ## A Decade of Ratings
 
-The numbers do not lie, and they do not flatter. Across {plotData.length}
-reviews the yearly average has slid from 7.7 in 2017 to the low 6s today, a
-drop of more than a point. The more telling number is the spread, which has
-roughly doubled, from a standard deviation near 1.5 in the calm early years to
-over 3 by 2026. Fast food in 2017 was reliably mediocre-to-good. Fast food in
-2026 is either a 9 or a 0. There is no middle anymore.
+Across {plotData.length} reviews, two descriptive trends are evident. Central
+tendency declined modestly, with the annual mean rating falling from
+approximately 7.7 in 2017 to the low 6 range in the most recent years, a
+reduction of slightly more than one point on the ten-point scale. Dispersion
+increased more substantially. The annual standard deviation approximately
+doubled, from roughly 1.5 in the earlier period to above 3.0 by 2026. The
+later distribution is markedly more bimodal, with observations increasingly
+concentrated near the extremes of the scale rather than its midpoint.
 
-The items at the bottom share a theme. The SpongeBob Crabby Whopper (0.2),
-Taco Bell's Diablo Dusted Nuggets (0.3) and Avocado Ranch Crispy Chicken Taco
-(0.5), and McDonald's Bacon Hot Honey McCrispy (2) are less food than marketing
-artifact. The boring classics that skip the collab treatment, the Big Mac, the
-McRib, the standard Whopper, still pull 8s and 9s.
+The lowest-scoring observations cluster among limited-time and
+brand-collaboration items. Representative cases include the SpongeBob Crabby
+Whopper (0.2), Taco Bell's Diablo Dusted Nuggets (0.3) and Avocado Ranch
+Crispy Chicken Taco (0.5), and McDonald's Bacon Hot Honey McCrispy (2.0). By
+contrast, recurrently reviewed standard menu items, among them the Big Mac,
+the McRib, and the standard Whopper, continue to receive scores in the 8 to 9
+range, indicating that the decline is concentrated in novel product launches
+rather than the core menu.
 
-Prices went the other way. Over the same decade the typical reviewed item
-climbed from under $5 to around $8, the better part of a doubling. Put the two
-trends together and the story is plain. People are paying more for food that a
-man who eats it for a living likes less and less.
+Price moved in the opposite direction. Over the same interval the mean
+reported price of a reviewed item rose from under $5 to approximately $8, an
+increase approaching but not reaching a doubling. The aggregate pattern is an
+inverse association between price and rating, with cost rising as evaluated
+quality fell.
 
-One honest caveat. This is one mouth, not an industry. ReviewBrah was 19 in
-2017 and is near 30 now, palates change, novelty fades, and a 0.2 makes for
-better content than a 6.5, so the incentives do not all point at the food. The
-data here is suggestive, not conclusive. What it can say is that the person
-best positioned to notice, the one who has actually eaten all of it, thinks it
-is getting worse, and his own scores agree.
+Several limitations qualify these results. The data reflect a single evaluator
+rather than a representative sample of the industry. The reviewer was
+approximately 19 years old in 2017 and is near 30 at present, and changes in
+individual palate, reviewing experience, and audience-driven incentives toward
+more extreme scores cannot be separated from changes in the underlying
+product. The findings are therefore best characterized as suggestive rather
+than conclusive. They establish only that the individual with the most
+sustained exposure to these products reports a decline, and that his recorded
+scores are consistent with that report.
 
 ## Ratings Over Time
 
