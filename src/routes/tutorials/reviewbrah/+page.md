@@ -1114,8 +1114,8 @@ tendency declined modestly, with the annual mean rating falling from
 approximately 7.7 in 2017 to the low 6 range in the most recent years, a
 reduction of slightly more than one point on the ten-point scale. Dispersion
 increased more substantially. The annual standard deviation approximately
-doubled, from roughly 1.5 in the earlier period to above 3.0 by 2026. The
-later distribution is markedly more bimodal, with observations increasingly
+doubled, from roughly 1.5 in the earlier period to above 3.0 so far in 2026.
+The later distribution is markedly more bimodal, with observations increasingly
 concentrated near the extremes of the scale rather than its midpoint.
 
 The lowest-scoring observations cluster among limited-time and
@@ -1133,57 +1133,54 @@ increase approaching but not reaching a doubling. The aggregate pattern is an
 inverse association between price and rating, with cost rising as evaluated
 quality fell.
 
-Several limitations qualify these results. The data reflect a single evaluator
-rather than a representative sample of the industry. The reviewer was
-approximately 19 years old in 2017 and is near 30 at present, and changes in
-individual palate, reviewing experience, and audience-driven incentives toward
-more extreme scores cannot be separated from changes in the underlying
-product. The findings are therefore best characterized as suggestive rather
-than conclusive. They establish only that the individual with the most
-sustained exposure to these products reports a decline, and that his recorded
-scores are consistent with that report.
+ReviewBrah is getting older, and despite perceived consistency in his reviews,
+subtle changes in individual palate and reviewing experience could play a
+factor. The findings are therefore best characterized as suggestive rather than
+conclusive. They establish only that the individual with the most sustained
+exposure to these products reports a decline, and that his recorded scores are
+consistent with that report.
 
 ## Ratings Over Time
 
 <div class="plot-container" bind:this={timelineEl}></div>
 
-<p class="plot-caption">Every review as a dot, colored by year; black line is the 15-review rolling average, dashed line the all-time mean ({overallMean.toFixed(2)}). Hover any point for the item, chain, date and score.</p>
+<p class="plot-caption">Each review is a dot, colored by year. The black line is the 15-review rolling average and the dashed line marks the all-time mean ({overallMean.toFixed(2)}). Hover any point for the item, chain, date, and score.</p>
 
 ## Distribution by Year
 
 <div class="plot-container" bind:this={yearEl}></div>
 
-<p class="plot-caption">Canonical box plot per year: box = interquartile range, line = median, whiskers = 1.5×IQR, dots = outliers. Boxes stay short and high through 2021, then stretch year after year. Hover a year for n, mean, median and SD.</p>
+<p class="plot-caption">A box plot per year. The box spans the interquartile range, the center line is the median, the whiskers extend to 1.5 times the IQR, and dots are outliers. Hover a year for n, mean, median, and SD.</p>
 
 ## Spread by Year
 
 <div class="plot-container" bind:this={spreadEl}></div>
 
-<p class="plot-caption">Standard deviation of each year's ratings — how far a typical review swings from that year's average. Black whiskers are 95% confidence intervals on the SD estimate (wider for smaller-n years like 2026). It roughly doubles from ~1.4 in the early years to ~3 by 2025–26. Hover a year for the exact SD, CI, mean and n.</p>
+<p class="plot-caption">Standard deviation of each year's ratings. Black whiskers are 95% confidence intervals on the standard-deviation estimate. Hover a year for the exact SD, confidence interval, mean, and n.</p>
 
 ## By Chain
 
 <div class="plot-container" bind:this={chainsEl}></div>
 
-<p class="plot-caption">One panel per chain with ≥15 reviews ({topChains.length} chains, ordered by review count). Dots are individual reviews colored by year; each black line is a least-squares trend with a shaded 95% confidence band — a wide band means the slope is weakly determined. Caveat: all panels share one global time axis, so a chain reviewed mostly in later (lower-rated) years can show a downward slope even if its own quality held steady. Hover any point for details.</p>
+<p class="plot-caption">One panel per chain with at least 15 reviews ({topChains.length} chains, ordered by review count). Dots are individual reviews colored by year. Each black line is a least-squares trend with a shaded 95% confidence band. Hover any point for details.</p>
 
 ## Yearly Average by Chain
 
 <div class="plot-container" bind:this={eraEl}></div>
 
-<p class="plot-caption">Each chain's mean rating per year, connected into a trajectory; dots colored by year. Same {topChains.length} chains, ordered with the steepest early→late decline at top. Hover a dot for the exact yearly mean and sample size.</p>
+<p class="plot-caption">Each chain's mean rating per year, connected into a trajectory, with dots colored by year. Same {topChains.length} chains, ordered by the early-to-recent change in mean with the largest decrease at top. Hover a dot for the yearly mean and sample size.</p>
 
 ## Who Soured the Most
 
 <div class="plot-container" bind:this={souredEl}></div>
 
-<p class="plot-caption">The trajectory above shows the shape; this is the verdict. Each chain's mean rating early (2017–2021, blue) vs recent (2022–2026, red); dot size ∝ number of reviews and the faint colored whiskers are 95% confidence intervals on each mean. Read the ranking with that uncertainty in mind — a big swing on a small dot with wide whiskers is weak evidence. Sorted by biggest drop at top; dashed line is the all-time mean ({overallMean.toFixed(2)}). Hover a dot for mean, n and CI.</p>
+<p class="plot-caption">Each chain's mean rating for early reviews (2017 to 2021, blue) and recent reviews (2022 to 2026, red). Dot area is proportional to the number of reviews, and the faint colored whiskers are 95% confidence intervals on each mean. Rows are ordered by the size of the early-to-recent decrease. The dashed line marks the all-time mean ({overallMean.toFixed(2)}). Hover a dot for mean, n, and CI.</p>
 
 ## Price Over Time
 
 <div class="plot-container" bind:this={priceEl}></div>
 
-<p class="plot-caption">Every priced review ({priceData.length} with a parseable dollar amount, ≤ $30) plotted by date, colored by year. The black line is a least-squares fit with a 95% confidence band. The upward slope is real (it tracks known fast-food CPI), but treat the band as a lower bound on uncertainty: prices were parsed from messy free-text ("~$22", "$6–$8", "Included") and the ≤ $30 filter drops combo/range outliers, so true uncertainty is wider than shown. Hover any point for the item, chain, date and price.</p>
+<p class="plot-caption">Each priced review with a parseable dollar amount at or below $30 ({priceData.length} reviews), plotted by date and colored by year. The black line is a least-squares fit with a 95% confidence band. Hover any point for the item, chain, date, and price.</p>
 
 <table class="sortable-table">
   <thead>
