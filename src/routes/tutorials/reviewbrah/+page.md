@@ -1080,27 +1080,29 @@
 # Getting Every ReviewBrah Rating Using LLMs
 
 This analysis started the same way his did. In a May 2026 video titled
-*"Are We Nearing the End?"*, ReviewBrah recounts a "casual thought" — "the last
-couple of items that I've reviewed were really bad, weren't they" — and decides
-to check: "I started noting down the scores." The verdict on his own recent
-work: "it's actually just as bad as you thought… it was actually worse than I
-even imagined it being." Taco Bell's Crunch Wrap Slider drew a flat zero — "do
-you know how often I give a zero out of 10? Almost never" — and Wendy's
-"improved" spicy chicken a 2, because "they took a good thing and in the name of
-progress ruined it." He stresses this "isn't cherry-picked, this is the totality
-of just the latest reviews," then lands on the question that names this project:
-"years ago I was asking myself how bad can it get… here we are three years
-later, and even though you would think we've reached the bottom, I don't think
-we have yet." He ran that check on a handful of recent videos; we ran it on
-{plotData.length}, dating back to 2017.
+*"Are We Nearing the End?"*, ReviewBrah recounts a "casual thought," that "the
+last couple of items that I've reviewed were really bad, weren't they," and
+decides to check. "I started noting down the scores," he says, and the verdict
+on his own recent work was worse than he expected: "it's actually just as bad
+as you thought… it was actually worse than I even imagined it being." Taco
+Bell's Crunch Wrap Slider drew a flat zero, which prompted the aside "do you
+know how often I give a zero out of 10? Almost never," and Wendy's "improved"
+spicy chicken managed a 2, because "they took a good thing and in the name of
+progress ruined it." He is careful that this "isn't cherry-picked, this is the
+totality of just the latest reviews," before landing on the question that names
+this project: "years ago I was asking myself how bad can it get… here we are
+three years later, and even though you would think we've reached the bottom, I
+don't think we have yet." He ran that check on a handful of recent videos. We
+ran it on every one we could recover, {plotData.length} reviews dating back to
+2017.
 
-A decade of weekly fast-food reviews from a single, remarkably consistent
-palate is functioning, almost accidentally, as a longitudinal sentiment index
-for an industry that has stopped trying to feed people and started trying to go
-viral. That consistency is the whole instrument: because the same person has
-graded on the same scale, week after week, for ten years, the decline he feels
-in his gut is something we can actually measure — and keep measuring, in close
-to real time.
+What makes that possible is the reviewer himself. A decade of weekly fast-food
+reviews from a single, remarkably consistent palate is functioning, almost
+accidentally, as a longitudinal sentiment index for an industry that has
+stopped trying to feed people and started trying to go viral. That consistency
+is the whole instrument. Because the same person has graded on the same scale,
+week after week, for ten years, the decline he feels in his gut is something we
+can actually measure, and keep measuring, in close to real time.
 
 <p class="rating-count">{plotData.length} ratings analyzed | Last updated: May 2026</p>
 
