@@ -1075,14 +1075,11 @@
   .plot-container :global(svg) { display: block; height: auto; }
   .plot-container :global(figure) { margin: 0; }
   .plot-caption { font-size: 0.85em; color: #666; margin: 0 0 1.5em; font-style: italic; }
-  blockquote { margin: 1.5em 0; padding: 0.5em 0 0.5em 1.25em; border-left: 4px solid #d04a3b; font-size: 1.15em; line-height: 1.5; color: #2c3e50; font-style: italic; }
 </style>
 
 # Getting Every ReviewBrah Rating Using LLMs
 
-A soft-spoken young man in a dark suit and tie sits in his bedroom and unboxes a SpongeBob-branded Burger King "Crabby Whopper." This is ReviewBrah, and he has done a version of this almost every week for a decade. In May 2017 he gave Chick-fil-A's Smokehouse BBQ Bacon Sandwich a **9.7**. In December 2025 the Crabby Whopper earned a **0.2**. That gap — 9.7 to 0.2 — is the whole essay.
-
-> A decade of weekly fast-food reviews from a single, remarkably consistent palate is functioning, almost accidentally, as a longitudinal sentiment index for an industry that has stopped trying to feed people and started trying to go viral.
+A decade of weekly fast-food reviews from a single, remarkably consistent palate is functioning, almost accidentally, as a longitudinal sentiment index for an industry that has stopped trying to feed people and started trying to go viral.
 
 <p class="rating-count">{plotData.length} ratings analyzed | Last updated: May 2026</p>
 
