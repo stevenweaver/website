@@ -1077,38 +1077,44 @@
   .plot-caption { font-size: 0.85em; color: #666; margin: 0 0 1.5em; font-style: italic; }
 </style>
 
-# Getting Every ReviewBrah Rating Using LLMs
+# Capturing and Characterizing the Decline of American Fast-Food
 
-This analysis started the same way his did. In a May 2026 video titled
-*"Are We Nearing the End?"*, ReviewBrah recounts a "casual thought," that "the
-last couple of items that I've reviewed were really bad, weren't they," and
-decides to check. "I started noting down the scores," he says, and the verdict
-on his own recent work was worse than he expected: "it's actually just as bad
-as you thought… it was actually worse than I even imagined it being." Taco
-Bell's Crunch Wrap Slider drew a flat zero, which prompted the aside "do you
-know how often I give a zero out of 10? Almost never," and Wendy's "improved"
-spicy chicken managed a 2, because "they took a good thing and in the name of
-progress ruined it." He is careful that this "isn't cherry-picked, this is the
-totality of just the latest reviews," before landing on the question that names
-this project: "years ago I was asking myself how bad can it get… here we are
-three years later, and even though you would think we've reached the bottom, I
-don't think we have yet." He ran that check on a handful of recent videos. We
-ran it on every one we could recover, {plotData.length} reviews dating back to
-2017.
+In a May 2026 video titled [_"Are We Nearing the End?"_](https://www.youtube.com/watch?v=-Pb2ythhd9E), ReviewBrah recounts a
+"casual thought," that "the last couple of items that I've reviewed were really
+bad, weren't they," and decides to check. "I started noting down the scores,"
+he says, and the verdict on his own recent work was worse than he expected:
+"it's actually just as bad as you thought… it was actually worse than I even
+imagined it being." Taco Bell's Crunch Wrap Slider drew a flat zero, which
+prompted the aside "do you know how often I give a zero out of 10? Almost
+never," and Wendy's "improved" spicy chicken managed a 2, because "they took a
+good thing and in the name of progress ruined it." He is careful that this
+"isn't cherry-picked, this is the totality of just the latest reviews," before
+landing on the question : "years ago I was asking myself how bad can it get…
+here we are three years later, and even though you would think we've reached
+the bottom, I don't think we have yet."
 
-What makes that possible is the reviewer himself. A decade of weekly fast-food
-reviews from a single, remarkably consistent palate is functioning, almost
-accidentally, as a longitudinal sentiment index for an industry that has
-stopped trying to feed people and started trying to go viral. That consistency
-is the whole instrument. Because the same person has graded on the same scale,
-week after week, for ten years, the decline he feels in his gut is something we
-can actually measure, and keep measuring, in close to real time.
+In an effort to characterize this perceived decline clearly, I've recorded
+{plotData.length} reviews dating back to 2017.
+
+What makes that possible is the reviewer himself. Over a decade of weekly
+fast-food reviews from a single, remarkably consistent palate is functioning,
+almost accidentally, as a longitudinal sentiment index for an industry that has
+stopped trying to feed people and started trying to go viral (e.g. Grimace
+Milkshakes, Baja Blast Pies). That consistency is the whole instrument. Because
+the same person has graded on the same scale, week after week, for over ten
+years, the decline he feels in his gut is something we can actually measure in
+close to real time.
 
 <p class="rating-count">{plotData.length} ratings analyzed | Last updated: May 2026</p>
 
 ## A Decade of Ratings
 
-Across {plotData.length} reviews from 2017 to 2026 the pattern is consistent and, once you see it, hard to unsee: the average score slips only about a point, but the spread roughly _doubles_. Early ReviewBrah almost never went below a 4; recent ReviewBrah hands out 0.2s and 9.9s in the same month. It isn't deflation — it's polarization. Every chart below is colored along a single 2017→2026 ramp so the year reads at a glance.
+Across {plotData.length} reviews from 2017 to 2026 the pattern is consistent
+and, once you see it, hard to unsee: the average score slips only about a
+point, but the spread roughly _doubles_. Early ReviewBrah almost never went
+below a 4; recent ReviewBrah hands out 0.2s and 9.9s in the same month. It
+isn't deflation — it's polarization. Every chart below is colored along a
+single 2017→2026 ramp so the year reads at a glance.
 
 ## Ratings Over Time
 
