@@ -1083,39 +1083,6 @@ After ReviewBrah asked in a May 2026 video whether fast food is [_"nearing the e
 
 <p class="rating-count">{plotData.length} ratings analyzed | Last updated: May 2026</p>
 
-## A Decade of Ratings
-
-Across {plotData.length} reviews, two descriptive trends are evident. Central
-tendency declined modestly, with the annual mean rating falling from
-approximately 7.7 in 2017 to the low 6 range in the most recent years, a
-reduction of slightly more than one point on the ten-point scale. Dispersion
-increased more substantially. The annual standard deviation approximately
-doubled, from roughly 1.5 in the earlier period to above 3.0 so far in 2026.
-The later distribution is markedly more bimodal, with observations increasingly
-concentrated near the extremes of the scale rather than its midpoint.
-
-The lowest-scoring observations cluster among limited-time and
-brand-collaboration items. Representative cases include the SpongeBob Crabby
-Whopper (0.2), Taco Bell's Diablo Dusted Nuggets (0.3) and Avocado Ranch
-Crispy Chicken Taco (0.5), and McDonald's Bacon Hot Honey McCrispy (2.0). By
-contrast, recurrently reviewed standard menu items, among them the Big Mac,
-the McRib, and the standard Whopper, continue to receive scores in the 8 to 9
-range, indicating that the decline is concentrated in novel product launches
-rather than the core menu.
-
-Price moved in the opposite direction. Over the same interval the mean
-reported price of a reviewed item rose from under $5 to approximately $8, an
-increase approaching but not reaching a doubling. The aggregate pattern is an
-inverse association between price and rating, with cost rising as evaluated
-quality fell.
-
-ReviewBrah is getting older, and despite perceived consistency in his reviews,
-subtle changes in individual palate and reviewing experience could play a
-factor. The findings are therefore best characterized as suggestive rather than
-conclusive. They establish only that the individual with the most sustained
-exposure to these products reports a decline, and that his recorded scores are
-consistent with that report.
-
 ## Ratings Over Time
 
 <div class="plot-container" bind:this={timelineEl}></div>
