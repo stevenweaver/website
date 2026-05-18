@@ -1079,31 +1079,7 @@
 
 # Capturing and Characterizing the Decline of American Fast-Food
 
-In a May 2026 video titled [_"Are We Nearing the End?"_](https://www.youtube.com/watch?v=-Pb2ythhd9E), ReviewBrah recounts a
-"casual thought," that "the last couple of items that I've reviewed were really
-bad, weren't they," and decides to check. "I started noting down the scores,"
-he says, and the verdict on his own recent work was worse than he expected:
-"it's actually just as bad as you thought… it was actually worse than I even
-imagined it being." Taco Bell's Crunch Wrap Slider drew a flat zero, which
-prompted the aside "do you know how often I give a zero out of 10? Almost
-never," and Wendy's "improved" spicy chicken managed a 2, because "they took a
-good thing and in the name of progress ruined it." He is careful that this
-"isn't cherry-picked, this is the totality of just the latest reviews," before
-landing on the question : "years ago I was asking myself how bad can it get…
-here we are three years later, and even though you would think we've reached
-the bottom, I don't think we have yet."
-
-In an effort to characterize this perceived decline clearly, I've recorded
-{plotData.length} reviews dating back to 2017.
-
-What makes that possible is the reviewer himself. Over a decade of weekly
-fast-food reviews from a single, remarkably consistent palate is functioning,
-almost accidentally, as a longitudinal sentiment index for an industry that has
-stopped trying to feed people and started trying to go viral (e.g. Grimace
-Milkshakes, Baja Blast Pies). That consistency is the whole instrument. Because
-the same person has graded on the same scale, week after week, for over ten
-years, the decline he feels in his gut is something we can actually measure in
-close to real time.
+After ReviewBrah asked in a May 2026 video whether fast food is [_"nearing the end"_](https://www.youtube.com/watch?v=-Pb2ythhd9E), I recorded {plotData.length} of his reviews dating back to 2017. The mean rating has fallen only modestly over that span, while the year-over-year standard deviation has roughly doubled, which is the primary driver of the decline.
 
 <p class="rating-count">{plotData.length} ratings analyzed | Last updated: May 2026</p>
 
