@@ -11,6 +11,11 @@
   let souredEl = $state();
 
   const ratings = [
+    {item:"Minions & Monsters Meal",restaurant:"Wendy's",cost:"$17",rating:"7.0",date:"2026-06-17"},
+    {item:"FIFA World Cup Meal",restaurant:"McDonald's",cost:"$14",rating:"6.5",date:"2026-06-10"},
+    {item:"Crispy Parm Pan Pizza",restaurant:"Pizza Hut",cost:"$16",rating:"8.4",date:"2026-06-04"},
+    {item:"Space Ranger Roni Pizza",restaurant:"Papa John's",cost:"$9",rating:"8.6",date:"2026-05-29"},
+    {item:"Boneless Bucket",restaurant:"KFC",cost:"$16",rating:"3.5",date:"2026-05-22"},
     {item:"Barbecue Bounty Whopper",restaurant:"Burger King",cost:"$10.99",rating:"8.5",date:"2026-05-04"},
     {item:"Grogu's Garlic Chicken Fries",restaurant:"Burger King",cost:"$5.50",rating:"4",date:"2026-05-04"},
     {item:"Imperial Cheddar Ranch Tots",restaurant:"Burger King",cost:"$2.50",rating:"7.6",date:"2026-05-04"},
