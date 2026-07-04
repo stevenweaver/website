@@ -1,79 +1,163 @@
+/* ============================================================
+   Design tokens — "Phylogeny as identity"
+   Rams-quiet order + Munari playful signal.
+   ============================================================ */
+
+:root {
+	/* Color ------------------------------------------------ */
+	--paper: #f7f6f1; /* warm lab-paper ground */
+	--paper-raised: #fffffe; /* cards / raised surfaces */
+	--ink: #1c1e1b; /* body text */
+	--ink-soft: #4c534b; /* secondary text */
+	--ink-faint: #7d857b; /* captions, meta */
+	--pine: #2c4a3b; /* structural green: rules, links, tree */
+	--pine-deep: #203a2e; /* link hover-adjacent, headings accent */
+	--sage: #8fa99b; /* muted secondary */
+	--sage-tint: #e9ece4; /* soft fills */
+	--rule: #dcdfd5; /* hairlines (warm, replaces cold #eaecef) */
+	--signal: #e4552e; /* Munari vermilion — the one bold spend */
+	--signal-deep: #c13f1e; /* signal hover */
+	--sky: #3b6fb0; /* optional second data hue */
+
+	/* Type ------------------------------------------------- */
+	--font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+	--font-body: 'Newsreader', Georgia, 'Times New Roman', serif;
+	--font-mono: 'Space Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+	/* Spacing scale (0.25rem base) ------------------------- */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+
+	/* Structure -------------------------------------------- */
+	--sidebar-w: 18rem;
+	--content-max: 44rem; /* comfortable reading measure for serif body */
+	--radius: 4px;
+	--radius-lg: 8px;
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 }
 
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
 body {
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-		Cantarell, 'Helvetica Neue', sans-serif;
-	line-height: 1.7;
-	color: #2c3e50;
-	background-color: #fff;
+	font-family: var(--font-body);
+	font-size: 1.125rem;
+	line-height: 1.65;
+	color: var(--ink);
+	background-color: var(--paper);
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
 
-a {
-	color: #3eaf7c;
-	font-weight: 500;
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
+/* Headings — Space Grotesk, tight and deliberate ---------- */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+	font-family: var(--font-display);
 	font-weight: 600;
-	line-height: 1.25;
-	margin-top: 1.5rem;
-	margin-bottom: 1rem;
+	line-height: 1.15;
+	color: var(--ink);
+	letter-spacing: -0.015em;
+	margin-top: var(--space-12);
+	margin-bottom: var(--space-4);
 }
 
 h1 {
-	font-size: 2.2rem;
+	font-size: clamp(2.1rem, 1.6rem + 2.2vw, 2.9rem);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	margin-top: 0;
 }
 
 h2 {
-	font-size: 1.65rem;
-	padding-bottom: 0.3rem;
-	border-bottom: 1px solid #eaecef;
+	font-size: clamp(1.5rem, 1.3rem + 1vw, 1.85rem);
+	padding-bottom: var(--space-3);
+	border-bottom: 1px solid var(--rule);
 }
 
 h3 {
-	font-size: 1.35rem;
+	font-size: 1.3rem;
+}
+
+/* First heading in a page/section shouldn't push a big top gap */
+h1:first-child,
+h2:first-child,
+h3:first-child {
+	margin-top: 0;
 }
 
 p {
-	margin: 1rem 0;
+	margin: var(--space-4) 0;
 }
 
+/* Links — functional pine, underlined; vermilion on interaction */
+a {
+	color: var(--pine);
+	font-weight: 500;
+	text-decoration: underline;
+	text-decoration-color: var(--sage);
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: 1px;
+	transition:
+		color 0.15s ease,
+		text-decoration-color 0.15s ease;
+}
+
+a:hover {
+	color: var(--signal);
+	text-decoration-color: var(--signal);
+}
+
+/* Visible focus everywhere (keyboard a11y) ---------------- */
+:focus-visible {
+	outline: 2px solid var(--signal);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* Data / code type — Space Mono -------------------------- */
 code {
-	color: #476582;
-	padding: 0.25rem 0.5rem;
-	margin: 0;
-	font-size: 0.85em;
-	background-color: rgba(27, 31, 35, 0.05);
-	border-radius: 3px;
+	font-family: var(--font-mono);
+	color: var(--pine-deep);
+	padding: 0.12em 0.4em;
+	font-size: 0.82em;
+	background-color: var(--sage-tint);
+	border-radius: var(--radius);
 }
 
 pre {
-	background-color: #282c34;
-	padding: 1.25rem 1.5rem;
+	font-family: var(--font-mono);
+	background-color: var(--ink);
+	color: var(--paper);
+	padding: var(--space-6);
 	overflow-x: auto;
-	border-radius: 6px;
-	line-height: 1.4;
+	border-radius: var(--radius-lg);
+	line-height: 1.5;
+	font-size: 0.9rem;
+	margin: var(--space-6) 0;
 }
 
 pre code {
-	color: #fff;
+	color: inherit;
 	padding: 0;
 	background-color: transparent;
 	border-radius: 0;
+	font-size: 1em;
 }
 
 img {
@@ -81,9 +165,60 @@ img {
 	height: auto;
 }
 
+blockquote {
+	margin: var(--space-6) 0;
+	padding: var(--space-2) var(--space-6);
+	border-left: 3px solid var(--sage);
+	color: var(--ink-soft);
+	font-style: italic;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid var(--rule);
+	margin: var(--space-12) 0;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	font-size: 0.95rem;
+}
+
+/* Utility: a mono "eyebrow" label used as structural signal */
+.eyebrow {
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	font-weight: 400;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	color: var(--signal);
+}
+
+/* Utility: a mono publication/updated dateline under a page title */
+.dateline {
+	font-family: var(--font-mono);
+	font-size: 0.72rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--ink-faint);
+	margin: calc(-1 * var(--space-2)) 0 var(--space-8);
+}
+
 #sw-image img {
 	border-radius: 50%;
 	width: 200px;
 	height: 200px;
 	object-fit: cover;
+}
+
+/* Respect reduced-motion globally ------------------------- */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+	}
 }

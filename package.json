@@ -11,6 +11,9 @@
     "deploy": "./deploy.sh"
   },
   "dependencies": {
+    "@fontsource/newsreader": "^5.2.10",
+    "@fontsource/space-grotesk": "^5.2.10",
+    "@fontsource/space-mono": "^5.2.9",
     "@observablehq/notebook-runtime": "^1.3.1",
     "@observablehq/plot": "^0.6.17",
     "displaying-phylogenetic-trees-with-phylotree-js": "https://api.observablehq.com/@stevenweaver/phylotree-1-0-0.tgz",

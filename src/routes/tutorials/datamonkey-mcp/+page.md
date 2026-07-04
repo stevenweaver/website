@@ -1,5 +1,7 @@
 # Running HyPhy Analyses with Datamonkey MCP on Claude Cowork
 
+<p class="dateline">Published May 2026</p>
+
 ## Introduction
 
 [Datamonkey](https://datamonkey.org) is a web application for evolutionary analysis powered by [HyPhy](https://hyphy.org). Traditionally, running selection analyses requires either installing HyPhy locally or navigating the Datamonkey web interface manually. With the Datamonkey MCP (Model Context Protocol) server, you can now run these analyses directly through a conversational interface in [Claude Cowork](https://claude.ai).

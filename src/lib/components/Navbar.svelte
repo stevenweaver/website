@@ -1,20 +1,27 @@
 <script>
-	const navLinks = [
-		{ text: 'Home', link: '/' },
-		{ text: 'Github', link: 'https://github.com/stevenweaver' }
-	];
+	let { navOpen = false, onMenuToggle } = $props();
 </script>
 
 <nav class="navbar">
 	<div class="navbar-inner">
-		<h1 class="site-title">
-			<a href="/" class="site-title-link">Steven Weaver</a>
-		</h1>
-		<div class="nav-links">
-			{#each navLinks as { text, link }}
-				<a href={link} class="nav-link">{text}</a>
-			{/each}
-		</div>
+		<a href="/" class="wordmark">
+			<span class="wordmark-name">Steven Weaver</span>
+			<span class="wordmark-tag">phylogenetics &amp; systems</span>
+		</a>
+
+		<button
+			class="menu-toggle"
+			aria-label={navOpen ? 'Close navigation' : 'Open navigation'}
+			aria-expanded={navOpen}
+			aria-controls="site-sidebar"
+			onclick={onMenuToggle}
+		>
+			<span class="menu-icon" class:open={navOpen} aria-hidden="true">
+				<span></span>
+				<span></span>
+				<span></span>
+			</span>
+		</button>
 	</div>
 </nav>
 
@@ -22,50 +29,115 @@
 	.navbar {
 		position: sticky;
 		top: 0;
-		z-index: 10;
-		background-color: #fff;
-		border-bottom: 1px solid #eaecef;
-		padding: 0.7rem 0 0.7rem 1.5rem;
+		z-index: 30;
+		background-color: color-mix(in srgb, var(--paper) 88%, transparent);
+		backdrop-filter: saturate(1.4) blur(8px);
+		border-bottom: 1px solid var(--rule);
 	}
 
 	.navbar-inner {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: space-between;
 		align-items: center;
-		gap: 2rem;
+		gap: var(--space-4);
+		padding: var(--space-3) var(--space-6);
 	}
 
-	.site-title {
-		font-size: 1.3rem;
-		font-weight: 600;
-		margin: 0;
-		line-height: 1.5;
-	}
-
-	.site-title-link {
-		color: #2c3e50;
-		text-decoration: none;
-		cursor: pointer;
-	}
-
-	.site-title-link:hover {
-		color: #3eaf7c;
-	}
-
-	.nav-links {
+	.wordmark {
 		display: flex;
-		gap: 1.5rem;
-		align-items: center;
-	}
-
-	.nav-link {
-		color: #2c3e50;
+		flex-direction: column;
+		line-height: 1.05;
 		text-decoration: none;
-		font-weight: 500;
-		line-height: 1.5;
+		color: var(--ink);
 	}
 
-	.nav-link:hover {
-		color: #3eaf7c;
+	.wordmark:hover {
+		color: var(--ink);
+	}
+
+	.wordmark-name {
+		font-family: var(--font-display);
+		font-weight: 700;
+		font-size: 1.15rem;
+		letter-spacing: -0.02em;
+	}
+
+	.wordmark:hover .wordmark-name {
+		color: var(--pine);
+	}
+
+	.wordmark-tag {
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--ink-faint);
+		margin-top: 0.15rem;
+	}
+
+	/* Hamburger — hidden on desktop, shown when the sidebar folds away */
+	.menu-toggle {
+		display: none;
+		background: none;
+		border: 1px solid var(--rule);
+		border-radius: var(--radius);
+		width: 2.5rem;
+		height: 2.5rem;
+		cursor: pointer;
+		align-items: center;
+		justify-content: center;
+		color: var(--ink);
+	}
+
+	.menu-toggle:hover {
+		border-color: var(--sage);
+	}
+
+	.menu-icon {
+		display: block;
+		width: 20px;
+		height: 14px;
+		position: relative;
+	}
+
+	.menu-icon span {
+		position: absolute;
+		left: 0;
+		height: 2px;
+		width: 100%;
+		background: currentColor;
+		border-radius: 2px;
+		transition:
+			transform 0.22s ease,
+			opacity 0.22s ease,
+			top 0.22s ease;
+	}
+
+	.menu-icon span:nth-child(1) {
+		top: 0;
+	}
+	.menu-icon span:nth-child(2) {
+		top: 6px;
+	}
+	.menu-icon span:nth-child(3) {
+		top: 12px;
+	}
+
+	.menu-icon.open span:nth-child(1) {
+		top: 6px;
+		transform: rotate(45deg);
+	}
+	.menu-icon.open span:nth-child(2) {
+		opacity: 0;
+	}
+	.menu-icon.open span:nth-child(3) {
+		top: 6px;
+		transform: rotate(-45deg);
+	}
+
+	@media (max-width: 900px) {
+		.menu-toggle {
+			display: flex;
+		}
 	}
 </style>

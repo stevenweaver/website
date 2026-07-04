@@ -1,5 +1,7 @@
 # Using Kraken on Galaxy
 
+<p class="dateline">Published May 2017 · Updated May 2026</p>
+
 ## Brief Introduction 
 
 Today, we will introduce Kraken, a tool for metagenomic classification. Kraken
