@@ -1,5 +1,7 @@
 # Does the Internet Dream?
 
+<p class="dateline">Published June 2018 · Updated October 2025</p>
+
 In Werner Herzog’s new documentary, Lo And Behold: Reveries Of The Connected
 World, Herzog asks the question “Does the Internet Dream?” to several engineers,
 scientists, and thought-leaders. To me, the Internet is the means of

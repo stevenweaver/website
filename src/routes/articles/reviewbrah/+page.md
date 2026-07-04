@@ -871,9 +871,11 @@
     { restaurant: d.restaurant, period: EARLY, mean: d.earlyMean, n: d.earlyN, lo: d.earlyLo, hi: d.earlyHi },
     { restaurant: d.restaurant, period: RECENT, mean: d.recentMean, n: d.recentN, lo: d.recentLo, hi: d.recentHi }
   ]);
-  const periodColor = { domain: [EARLY, RECENT], range: ['#3b4cc0', '#b40426'] };
+  const periodColor = { domain: [EARLY, RECENT], range: ['#2c4a3b', '#e4552e'] };
 
-  const yearColor = { type: 'linear', scheme: 'turbo', label: 'Review year', tickFormat: 'd' };
+  // Perceptually-ordered single-hue ramp (sage → deep pine), colorblind-safe
+  // and monotonic in lightness — replaces the rainbow 'turbo' scheme.
+  const yearColor = { type: 'linear', range: ['#a7c1b0', '#22402f'], label: 'Review year', tickFormat: 'd' };
 
   onMount(() => {
     let ro, resizeT, disposed = false;
@@ -903,8 +905,8 @@
       y: { domain: [0, 10], label: 'Rating ↑', grid: true },
       marks: [
         Plot.dot(plotData, { x: 'date', y: 'rating', fill: 'year', r: 2.6, fillOpacity: 0.55, stroke: 'none' }),
-        Plot.line(rolling, { x: 'date', y: 'avg', stroke: '#222', strokeWidth: 2 }),
-        Plot.ruleY([overallMean], { stroke: '#888', strokeDasharray: '4 4' }),
+        Plot.line(rolling, { x: 'date', y: 'avg', stroke: '#e4552e', strokeWidth: 2.2 }),
+        Plot.ruleY([overallMean], { stroke: '#8fa99b', strokeDasharray: '4 4' }),
         Plot.tip(plotData, Plot.pointer({ x: 'date', y: 'rating', title: ptTitle }))
       ]
     }));
@@ -934,7 +936,7 @@
       y: { domain: [0, 3.5], label: 'Std. dev. of rating ↑', grid: true },
       marks: [
         Plot.barY(yearStats, { x: 'year', y: 'sd', fill: 'year', fillOpacity: 0.85 }),
-        Plot.ruleX(yearStats, { x: 'year', y1: 'sdLo', y2: 'sdHi', stroke: '#333', strokeWidth: 1.2 }),
+        Plot.ruleX(yearStats, { x: 'year', y1: 'sdLo', y2: 'sdHi', stroke: '#1c1e1b', strokeWidth: 1.2 }),
         Plot.ruleY([0]),
         Plot.tip(yearStats, Plot.pointerX({
           x: 'year', y: 'sd',
@@ -952,7 +954,7 @@
       y: { label: 'Price (USD) ↑', grid: true, nice: true },
       marks: [
         Plot.dot(priceData, { x: 'date', y: 'price', fill: 'year', r: 2.6, fillOpacity: 0.55, stroke: 'none' }),
-        Plot.linearRegressionY(priceData, { x: 'date', y: 'price', stroke: '#222', strokeWidth: 1.5, ci: 0.95 }),
+        Plot.linearRegressionY(priceData, { x: 'date', y: 'price', stroke: '#1c1e1b', strokeWidth: 1.5, ci: 0.95 }),
         Plot.tip(priceData, Plot.pointer({
           x: 'date', y: 'price',
           title: d => `${d.item}\n${d.restaurant} · ${d.date.toISOString().slice(0, 10)}\n$${d.price.toFixed(2)}`
@@ -969,9 +971,9 @@
       x: { type: 'time', label: null },
       y: { domain: [0, 10], label: null, ticks: 5, grid: true },
       marks: [
-        Plot.frame({ stroke: '#e0e0e0' }),
+        Plot.frame({ stroke: '#dcdfd5' }),
         Plot.dot(facetData, { fy: 'restaurant', x: 'date', y: 'rating', fill: 'year', r: 2.2, fillOpacity: 0.6, stroke: 'none' }),
-        Plot.linearRegressionY(facetData, { fy: 'restaurant', x: 'date', y: 'rating', stroke: '#222', strokeWidth: 1.5, ci: 0.95, fillOpacity: 0.12 }),
+        Plot.linearRegressionY(facetData, { fy: 'restaurant', x: 'date', y: 'rating', stroke: '#1c1e1b', strokeWidth: 1.5, ci: 0.95, fillOpacity: 0.12 }),
         Plot.tip(facetData, Plot.pointer({ fy: 'restaurant', x: 'date', y: 'rating', title: ptTitle }))
       ]
     }));
@@ -985,8 +987,8 @@
       x: { label: null, tickFormat: 'd', interval: 1 },
       y: { domain: [0, 10], label: null, ticks: 5, grid: true },
       marks: [
-        Plot.frame({ stroke: '#e0e0e0' }),
-        Plot.line(chainYear, { fy: 'restaurant', x: 'year', y: 'mean', stroke: '#bbb', strokeWidth: 1.5 }),
+        Plot.frame({ stroke: '#dcdfd5' }),
+        Plot.line(chainYear, { fy: 'restaurant', x: 'year', y: 'mean', stroke: '#8fa99b', strokeWidth: 1.5 }),
         Plot.dot(chainYear, { fy: 'restaurant', x: 'year', y: 'mean', fill: 'year', r: 3.6, stroke: 'white', strokeWidth: 0.6 }),
         Plot.tip(chainYear, Plot.pointer({
           fy: 'restaurant', x: 'year', y: 'mean',
@@ -1004,8 +1006,8 @@
       x: { domain: [0, 10], label: 'Mean rating →', grid: true },
       y: { domain: souredOrder, label: null },
       marks: [
-        Plot.ruleX([overallMean], { stroke: '#888', strokeDasharray: '4 4' }),
-        Plot.link(chainEarlyLate, { y: 'restaurant', x1: 'earlyMean', x2: 'recentMean', stroke: '#ddd', strokeWidth: 2 }),
+        Plot.ruleX([overallMean], { stroke: '#8fa99b', strokeDasharray: '4 4' }),
+        Plot.link(chainEarlyLate, { y: 'restaurant', x1: 'earlyMean', x2: 'recentMean', stroke: '#dcdfd5', strokeWidth: 2 }),
         Plot.ruleY(chainEarlyLateLong, { y: 'restaurant', x1: 'lo', x2: 'hi', stroke: 'period', strokeWidth: 1.5, strokeOpacity: 0.45 }),
         Plot.dot(chainEarlyLateLong, { y: 'restaurant', x: 'mean', fill: 'period', r: 'n', stroke: 'white', strokeWidth: 1 }),
         Plot.tip(chainEarlyLateLong, Plot.pointer({
@@ -1029,29 +1031,39 @@
 </script>
 
 <style>
-  .sortable-table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
-  .sortable-table th, .sortable-table td { padding: 6px 10px; border: 1px solid #ddd; text-align: left; }
-  .sortable-table th { cursor: pointer; user-select: none; background: #f5f5f5; white-space: nowrap; }
-  .sortable-table th:hover { background: #e8e8e8; }
-  .sortable-table tr:nth-child(even) { background: #fafafa; }
-  .rating-count { margin-bottom: 1em; font-style: italic; color: #666; }
+  .sortable-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin: 1.5rem 0; }
+  .sortable-table th, .sortable-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--rule); text-align: left; }
+  .sortable-table th {
+    cursor: pointer; user-select: none; white-space: nowrap;
+    font-family: var(--font-mono); font-size: 0.68rem; font-weight: 400;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-faint);
+    border-bottom: 1px solid var(--ink);
+  }
+  .sortable-table th:hover { color: var(--signal); }
+  /* Numeric columns (cost, rating, date) in tabular mono */
+  .sortable-table td:nth-child(n+3) { font-family: var(--font-mono); font-size: 0.82rem; color: var(--ink-soft); }
+  .sortable-table tbody tr:hover { background: var(--sage-tint); }
+  .rating-count {
+    margin-bottom: 1.5rem; font-family: var(--font-mono); font-size: 0.72rem;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint); font-style: normal;
+  }
   .plot-container { margin: 1em 0 0.25em; overflow-x: auto; max-width: 100%; }
   .plot-container :global(svg) { display: block; height: auto; }
   .plot-container :global(figure) { margin: 0; }
-  .plot-caption { font-size: 0.85em; color: #666; margin: 0 0 1.5em; font-style: italic; }
+  .plot-caption { font-size: 0.9rem; color: var(--ink-faint); margin: 0 0 2rem; font-style: italic; }
 </style>
 
 # Capturing and Characterizing the Decline of American Fast-Food
 
 After ReviewBrah asked in a May 2026 video whether fast food is [_"nearing the end"_](https://www.youtube.com/watch?v=-Pb2ythhd9E), I recorded {plotData.length} of his reviews dating back to 2017. The mean rating has fallen only modestly over that span, while the year-over-year standard deviation has roughly doubled, which is the primary driver of the decline.
 
-<p class="rating-count">{plotData.length} ratings analyzed | Last updated: May 2026</p>
+<p class="rating-count">{plotData.length} ratings analyzed · Published Oct 2025 · Updated Jun 2026</p>
 
 ## Ratings Over Time
 
 <div class="plot-container" bind:this={timelineEl}></div>
 
-<p class="plot-caption">Each review is a dot, colored by year. The black line is the 15-review rolling average and the dashed line marks the all-time mean ({overallMean.toFixed(2)}). Hover any point for the item, chain, date, and score.</p>
+<p class="plot-caption">Each review is a dot, shaded by year from pale sage (older) to deep pine (recent). The vermilion line is the 15-review rolling average and the dashed line marks the all-time mean ({overallMean.toFixed(2)}). Hover any point for the item, chain, date, and score.</p>
 
 ## Distribution by Year
 
@@ -1081,7 +1093,7 @@ After ReviewBrah asked in a May 2026 video whether fast food is [_"nearing the e
 
 <div class="plot-container" bind:this={souredEl}></div>
 
-<p class="plot-caption">Each chain's mean rating for early reviews (2017 to 2021, blue) and recent reviews (2022 to 2026, red). Dot area is proportional to the number of reviews, and the faint colored whiskers are 95% confidence intervals on each mean. Rows are ordered by the size of the early-to-recent decrease. The dashed line marks the all-time mean ({overallMean.toFixed(2)}). Hover a dot for mean, n, and CI.</p>
+<p class="plot-caption">Each chain's mean rating for early reviews (2017 to 2021, pine green) and recent reviews (2022 to 2026, vermilion). Dot area is proportional to the number of reviews, and the faint colored whiskers are 95% confidence intervals on each mean. Rows are ordered by the size of the early-to-recent decrease. The dashed line marks the all-time mean ({overallMean.toFixed(2)}). Hover a dot for mean, n, and CI.</p>
 
 ## Price Over Time
 

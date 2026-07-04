@@ -87,9 +87,9 @@
 
 <style>
 	.pub {
-		margin-bottom: 1rem;
-		padding-bottom: 0.75rem;
-		border-bottom: 1px solid #eaecef;
+		margin-bottom: var(--space-4);
+		padding-bottom: var(--space-3);
+		border-bottom: 1px solid var(--rule);
 	}
 
 	.pub:last-child {
@@ -98,52 +98,60 @@
 
 	.pub-title {
 		display: block;
+		font-family: var(--font-display);
 		font-weight: 500;
-		line-height: 1.4;
+		font-size: 1.05rem;
+		line-height: 1.35;
 	}
 
 	.pub-title a {
-		color: #3eaf7c;
+		color: var(--ink);
+		text-decoration: none;
 	}
 
 	.pub-title a:hover {
-		text-decoration: underline;
+		color: var(--signal);
 	}
 
 	.pub-authors {
 		display: block;
-		margin-top: 0.2rem;
-		font-size: 0.85em;
-		color: #555;
+		margin-top: 0.3rem;
+		font-size: 0.9rem;
+		color: var(--ink-soft);
 		line-height: 1.5;
 	}
 
 	.pub-meta {
 		display: block;
 		margin-top: 0.2rem;
-		font-size: 0.9em;
-		color: #666;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--ink-faint);
 	}
 
 	.pub-journal {
-		font-style: italic;
+		font-style: normal;
+		color: var(--pine);
 	}
 
 	.pub-year {
-		margin-left: 0.25rem;
+		margin-left: 0.35rem;
 	}
 
 	.pub-badge {
 		display: inline-block;
 		margin-left: 0.5rem;
-		padding: 0.1rem 0.4rem;
-		font-size: 0.75em;
-		background: #f0f0f0;
-		border-radius: 3px;
-		color: #888;
+		padding: 0.1rem 0.45rem;
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		background: var(--sage-tint);
+		border-radius: var(--radius);
+		color: var(--pine);
 	}
 
 	.error {
-		color: #c00;
+		color: var(--signal);
 	}
 </style>
