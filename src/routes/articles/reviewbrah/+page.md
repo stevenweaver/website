@@ -180,7 +180,7 @@
     {item:"Bacon Cajun Ranch Deluxe MC Krispy Chicken Sandwich",restaurant:"McDonald's",cost:"$7.30",rating:"8.5",date:"2024-04-22",vid:"iMQtMZxpfjc"},
     {item:"New York Style Pizza",restaurant:"Domino's",cost:"$18.00",rating:"6",date:"2024-04-17",vid:"OGTMH5Kg40A"},
     {item:"Cantina crispy chicken taco",restaurant:"Taco Bell",cost:"$3.65",rating:"9.1",date:"2024-04-12",vid:"6b7C79Vxk6Q"},
-    {item:"Spicy Chicken McNuggets",restaurant:"McDonald's",cost:"$5.30",rating:"8.0",date:"2024-04-06",vid:"xLlOEJtB0W0"},
+    {item:"Spicy Chicken McNuggets",restaurant:"McDonald's",cost:"$5.30",rating:"8.9",date:"2024-04-06",vid:"xLlOEJtB0W0"},
     {item:"KFC Saucy Nuggets (Korean Barbecue)",restaurant:"KFC",cost:"$5.99",rating:"4.8",date:"2024-04-02",vid:"aJMbOFUh9fA"},
     {item:"KFC Saucy Nuggets (Honey Sriracha)",restaurant:"KFC",cost:"$5.99",rating:"4.8",date:"2024-04-02",vid:"aJMbOFUh9fA"},
     {item:"KFC Saucy Nuggets (Sticky Chicky)",restaurant:"KFC",cost:"$5.99",rating:"4.8",date:"2024-04-02",vid:"aJMbOFUh9fA"},
