@@ -11,6 +11,19 @@
   let souredEl = $state();
 
   const ratings = [
+    {item:"Cheesy Bites Pizza",restaurant:"Pizza Hut",cost:"$14.99",rating:"7.4",date:"2026-10-24"},
+    {item:"Steak Double Dipping Burritos",restaurant:"Taco Bell",cost:"$6",rating:"0.2",date:"2026-10-17"},
+    {item:"Game Day Pretzel Burger",restaurant:"Burger King",cost:"$11",rating:"8.2",date:"2026-10-09"},
+    {item:"Smoked Cheddar CurderBurger",restaurant:"Culver's",cost:"$8.50",rating:"8.8",date:"2026-10-03"},
+    {item:"Diablo Ranch Crispy Chicken Crunch Wrap Slider",restaurant:"Taco Bell",cost:"$3",rating:"7",date:"2026-09-24"},
+    {item:"Spicy Chicken McNuggets (10-piece)",restaurant:"McDonald's",cost:"$7",rating:"8.4",date:"2026-09-18"},
+    {item:"Domino",restaurant:"Domino's",cost:"$8.75",rating:"3",date:"2026-09-03"},
+    {item:"Chicken and Waffles",restaurant:"Chick-fil-A",cost:"$5",rating:"9.7",date:"2026-08-24"},
+    {item:"Buttermilk Crispy Chicken Strips",restaurant:"IHOP",cost:"$13.69",rating:"8.7",date:"2026-08-16"},
+    {item:"Popcorn Chicken",restaurant:"KFC",cost:"$6",rating:"9.5",date:"2026-07-29"},
+    {item:"Epic Pepperoni Stuffed Crust Pizza",restaurant:"Papa John's",cost:"$14.99",rating:"9.2",date:"2026-07-22"},
+    {item:"Loaded Jalapeño Original Chicken Sandwich",restaurant:"Burger King",cost:"$9.08",rating:"0.3",date:"2026-07-13"},
+    {item:"Webberoni Pizza",restaurant:"Little Caesars",cost:"$10",rating:"8.8",date:"2026-06-23"},
     {item:"Minions & Monsters Meal",restaurant:"Wendy's",cost:"$17",rating:"7.0",date:"2026-06-17"},
     {item:"FIFA World Cup Meal",restaurant:"McDonald's",cost:"$14",rating:"6.5",date:"2026-06-10"},
     {item:"Crispy Parm Pan Pizza",restaurant:"Pizza Hut",cost:"$16",rating:"8.4",date:"2026-06-04"},
@@ -1057,7 +1070,7 @@
 
 After ReviewBrah asked in a May 2026 video whether fast food is [_"nearing the end"_](https://www.youtube.com/watch?v=-Pb2ythhd9E), I recorded {plotData.length} of his reviews dating back to 2017. The mean rating has fallen only modestly over that span, while the year-over-year standard deviation has roughly doubled, which is the primary driver of the decline.
 
-<p class="rating-count">{plotData.length} ratings analyzed · Published Oct 2025 · Updated Jun 2026</p>
+<p class="rating-count">{plotData.length} ratings analyzed · Published Oct 2025 · Updated Oct 2026</p>
 
 ## Ratings Over Time
 
